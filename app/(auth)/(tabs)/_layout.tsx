@@ -1,3 +1,4 @@
+import CustomHeader from '@/components/CustomHeader';
 import Colors from '@/constants/Colors';
 import { FontAwesome } from '@expo/vector-icons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
@@ -5,7 +6,6 @@ import Fontisto from '@expo/vector-icons/Fontisto';
 import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Text, View } from 'react-native';
 
 
 const TabsLayout = () => {
@@ -43,13 +43,7 @@ const TabsLayout = () => {
             <FontAwesome name='home' size={size} color={color} />
           ),
           headerTransparent: true,
-          header: () => {
-            return (
-              <View style={{ backgroundColor: 'white', padding: 20 }}>
-                <Text>To Do</Text>
-              </View>
-            )
-          }
+          header: () => <CustomHeader />
         }}
       />
       <Tabs.Screen
@@ -60,13 +54,7 @@ const TabsLayout = () => {
             <Fontisto name="money-symbol" size={size} color={color} />
           ),
           headerTransparent: true,
-          header: () => {
-            return (
-              <View style={{ backgroundColor: 'white', padding: 20 }}>
-                <Text>To Do</Text>
-              </View>
-            )
-          }
+          header: () => <CustomHeader />
         }}
       />
       <Tabs.Screen
@@ -77,13 +65,7 @@ const TabsLayout = () => {
             <FontAwesome6 name='money-bill-transfer' size={size} color={color} />
           ),
           headerTransparent: true,
-          header: () => {
-            return (
-              <View style={{ backgroundColor: 'white', padding: 20 }}>
-                <Text>To Do</Text>
-              </View>
-            )
-          }
+          header: () => <CustomHeader />
         }}
       />
       <Tabs.Screen
@@ -94,13 +76,7 @@ const TabsLayout = () => {
             <FontAwesome name='bitcoin' size={size} color={color} />
           ),
           headerTransparent: true,
-          header: () => {
-            return (
-              <View style={{ backgroundColor: 'white', padding: 20 }}>
-                <Text>To Do</Text>
-              </View>
-            )
-          }
+          header: () => <CustomHeader />
         }}
       />
     </Tabs>
