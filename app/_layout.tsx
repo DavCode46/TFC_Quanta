@@ -43,7 +43,7 @@ function RootLayoutNav() {
 
   return (
     <Stack>
-      <Stack.Screen name="signup" options={{ headerShown: true }} />
+      <Stack.Screen name="(auth)/(tabs)/_layout" options={{ headerShown: false }} />
     </Stack>
   );
 }

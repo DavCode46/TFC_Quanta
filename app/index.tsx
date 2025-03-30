@@ -1,5 +1,5 @@
 import Colors from '@/constants/Colors'
-import { defaultStyles } from '@/constants/Styles'
+import { generalStyles } from '@/constants/Styles'
 import { useAssets } from 'expo-asset'
 import { ResizeMode, Video } from 'expo-av'
 import { Link } from 'expo-router'
@@ -26,7 +26,7 @@ const index = () => {
 
       <View style={styles.buttonsWrapper}>
         <View style={styles.buttonContainer}>
-          <Link href={'/login'} style={[defaultStyles.pillButton, { backgroundColor: Colors.dark, flex: 1 }]} asChild>
+          <Link href={'/login'} style={[generalStyles.pillButton, { backgroundColor: Colors.dark, flex: 1 }]} asChild>
             <TouchableOpacity>
               <Text style={[styles.textButton, { color: Colors.white }]}>Iniciar sesión</Text>
             </TouchableOpacity>
@@ -34,7 +34,7 @@ const index = () => {
         </View>
 
         <View style={styles.buttonContainer}>
-          <Link href={'/signup'} style={[defaultStyles.pillButton, { backgroundColor: Colors.white, flex: 1 }]} asChild>
+          <Link href={'/signup'} style={[generalStyles.pillButton, { backgroundColor: Colors.white, flex: 1 }]} asChild>
             <TouchableOpacity>
               <Text style={styles.textButton}>Crear cuenta</Text>
             </TouchableOpacity>

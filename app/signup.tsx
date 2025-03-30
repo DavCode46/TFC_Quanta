@@ -1,5 +1,5 @@
 import Colors from '@/constants/Colors'
-import { defaultStyles } from '@/constants/Styles'
+import { generalStyles } from '@/constants/Styles'
 import { Ionicons } from '@expo/vector-icons'
 import { Link } from 'expo-router'
 import React, { useMemo, useState } from 'react'
@@ -82,7 +82,7 @@ const signup = () => {
   const [errorFullName, setErrorFullName] = useState('');
   const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
 
-  // Validaciones en tiempo real
+
   const handleEmailChange = (text: string) => {
     setEmail(text);
     setErrorEmail(validateEmail(text) ? '' : 'Email no válido');
@@ -114,15 +114,15 @@ const signup = () => {
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}>
-      <View style={defaultStyles.container}>
-        <Text style={defaultStyles.header}>¿Estás preparado?</Text>
-        <Text style={defaultStyles.descriptionText}>Regístrate y toma el control de tu dinero</Text>
+      <View style={generalStyles.container}>
+        <Text style={generalStyles.header}>¿Estás preparado?</Text>
+        <Text style={generalStyles.descriptionText}>Regístrate y toma el control de tu dinero</Text>
 
-        <View style={defaultStyles.inputContainer}>
+        <View style={generalStyles.inputContainer}>
           <TextInput
             value={fullName}
             onChangeText={handleFullNameChange}
-            style={defaultStyles.input}
+            style={generalStyles.input}
             placeholder='Nombre Completo'
             keyboardType='default'
           />
@@ -130,7 +130,7 @@ const signup = () => {
           <TextInput
             value={phoneNumber}
             onChangeText={handlePhoneChange}
-            style={defaultStyles.input}
+            style={generalStyles.input}
             placeholder='Teléfono'
             keyboardType='numeric'
           />
@@ -138,36 +138,36 @@ const signup = () => {
           <TextInput
             value={email}
             onChangeText={handleEmailChange}
-            style={defaultStyles.input}
+            style={generalStyles.input}
             placeholder='Email'
             keyboardType='email-address'
           />
           {errorEmail ? <Text style={styles.error}>{errorEmail}</Text> : null}
-          <View style={defaultStyles.inputWrapper}>
+          <View style={generalStyles.inputWrapper}>
             <TextInput
               value={password}
               onChangeText={handlePasswordChange}
-              style={defaultStyles.input}
+              style={generalStyles.input}
               placeholder='Contraseña'
               secureTextEntry={passwordSecureTextEntry}
               textContentType='oneTimeCode'
             />
 
-            <TouchableOpacity style={defaultStyles.iconButton} onPress={() => setShowPassword(!showPassword)}>
+            <TouchableOpacity style={generalStyles.iconButton} onPress={() => setShowPassword(!showPassword)}>
               <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={24} color="gray" />
             </TouchableOpacity>
           </View>
           {errorPassword ? <Text style={styles.error}>{errorPassword}</Text> : null}
-          <View style={defaultStyles.inputWrapper}>
+          <View style={generalStyles.inputWrapper}>
             <TextInput
               value={confirmPassword}
               onChangeText={handleConfirmPasswordChange}
-              style={[defaultStyles.input, { paddingRight: 45, paddingLeft: 14 }]}
+              style={[generalStyles.input, { paddingRight: 45, paddingLeft: 14 }]}
               placeholder='Confirma la contraseña'
               secureTextEntry={confirmPasswordSecureTextEntry}
               textContentType='oneTimeCode'
             />
-            <TouchableOpacity style={defaultStyles.iconButton} onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+            <TouchableOpacity style={generalStyles.iconButton} onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
               <Ionicons name={showConfirmPassword ? 'eye-off-outline' : 'eye-outline'} size={24} color="gray" />
             </TouchableOpacity>
           </View>
@@ -176,18 +176,18 @@ const signup = () => {
 
         <View style={{ flex: 1 }} >
           <TouchableOpacity
-            style={[defaultStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 20 }]}
+            style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 20 }]}
             onPress={() => {
               if (validateUserData()) {
                 Alert.alert('Registro exitoso', 'Cuenta correctamente')
               }
             }}
           >
-            <Text style={defaultStyles.buttonText}>Crear cuenta</Text>
+            <Text style={generalStyles.textButton}>Crear cuenta</Text>
           </TouchableOpacity>
           <Link href={'/login'} asChild>
             <TouchableOpacity>
-              <Text style={defaultStyles.textLink}>¿Ya tienes una cuenta? Inicia sesión</Text>
+              <Text style={generalStyles.link}>¿Ya tienes una cuenta? Inicia sesión</Text>
             </TouchableOpacity>
           </Link>
         </View>

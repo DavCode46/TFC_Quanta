@@ -1,7 +1,7 @@
 import Colors from '@/constants/Colors';
 import { StyleSheet } from 'react-native';
 
-export const defaultStyles = StyleSheet.create({
+export const generalStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
@@ -20,21 +20,21 @@ export const defaultStyles = StyleSheet.create({
   pillButton: {
     padding: 15,
     height: 65,
-    borderRadius: 50,
+    borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  textLink: {
+  link: {
     color: Colors.cornflowerBlue,
     fontSize: 16,
     fontWeight: '500',
   },
-  buttonText: {
+  textButton: {
     color: '#fff',
     fontSize: 18,
     fontWeight: '500',
   },
-  pillButtonSmall: {
+  pillButtonSm: {
     paddingHorizontal: 20,
     height: 50,
     borderRadius: 20,
