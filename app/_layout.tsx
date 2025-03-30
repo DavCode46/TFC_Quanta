@@ -43,7 +43,7 @@ function RootLayoutNav() {
 
   return (
     <Stack>
-      <Stack.Screen name="(auth)/(tabs)/_layout" options={{ headerShown: false }} />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
     </Stack>
   );
 }

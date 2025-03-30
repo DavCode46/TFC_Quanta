@@ -2,12 +2,12 @@ import { generalStyles } from '@/constants/Styles'
 import React from 'react'
 import { Text, View } from 'react-native'
 
-const crypto = () => {
+const operations = () => {
   return (
     <View style={generalStyles.container}>
-      <Text style={generalStyles.header}>Crypto</Text>
+      <Text style={generalStyles.header}>Operations</Text>
     </View>
   )
 }
 
-export default crypto
+export default operations
