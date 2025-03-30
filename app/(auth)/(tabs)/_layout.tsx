@@ -3,6 +3,7 @@ import Colors from '@/constants/Colors';
 import { FontAwesome } from '@expo/vector-icons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Fontisto from '@expo/vector-icons/Fontisto';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
 import React from 'react';
@@ -40,7 +41,7 @@ const TabsLayout = () => {
         options={{
           title: 'Inicio',
           tabBarIcon: ({ size, color }) => (
-            <FontAwesome name='home' size={size} color={color} />
+            <MaterialIcons name="account-balance" size={size} color={color} />
           ),
           headerTransparent: true,
           header: () => <CustomHeader />
@@ -73,7 +74,7 @@ const TabsLayout = () => {
         options={{
           title: 'Crypto',
           tabBarIcon: ({ size, color }) => (
-            <FontAwesome name='bitcoin' size={size} color={color} />
+            <FontAwesome6 name="bitcoin" size={size} color={color} />
           ),
           headerTransparent: true,
           header: () => <CustomHeader />

@@ -60,5 +60,14 @@ export const generalStyles = StyleSheet.create({
     position: 'absolute',
     right: 10,
     top: 22,
-  }
+  },
+  roundBtn: {
+    flex: 1,
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    backgroundColor: Colors.lightGray,
+    color: Colors.dark,
+    borderRadius: 50,
+    padding: 10,
+  },
 });

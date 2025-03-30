@@ -1,49 +1,46 @@
 import Colors from '@/constants/Colors';
+import { generalStyles } from '@/constants/Styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { BlurView } from 'expo-blur';
 import { Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CustomHeader = () => {
+  const insets = useSafeAreaInsets();
+  const adjustedTop = Math.min(insets.top, 20);
   return (
-    <View style={[styles.container, styles.shadow]}>
-      <Link href='/(auth)/(profile)/help' asChild>
-        <TouchableOpacity>
-          <Text style={[styles.roundBtn, styles.shadow]}>
-            <Ionicons name="help" size={20} color={Colors.dark} />
-          </Text>
-        </TouchableOpacity>
-      </Link>
-      <Link href='/(auth)/(profile)/profile' asChild>
-        <TouchableOpacity>
-          <Text style={[styles.roundBtn, styles.shadow]}>DM</Text>
-        </TouchableOpacity>
-      </Link>
-    </View>
+    <BlurView intensity={60} tint={'light'} style={{ paddingTop: adjustedTop }}>
+      <View style={[styles.container, styles.shadow]}>
+        <Link href='/(auth)/(profile)/help' asChild>
+          <TouchableOpacity>
+            <Text style={[generalStyles.roundBtn, styles.shadow, styles.roundBtnSize]}>
+              <Ionicons name="help" size={20} color={Colors.dark} />
+            </Text>
+          </TouchableOpacity>
+        </Link>
+        <Link href='/(auth)/(profile)/profile' asChild>
+          <TouchableOpacity>
+            <Text style={[generalStyles.roundBtn, styles.shadow, styles.roundBtnSize]}>DM</Text>
+          </TouchableOpacity>
+        </Link>
+      </View>
+    </BlurView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
     borderBottomColor: Colors.lightGray,
     borderBottomWidth: 1,
+    height: 60,
   },
-  roundBtn: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.lightGray,
-    color: Colors.dark,
-    borderRadius: 50,
-    padding: 10,
-    height: 40,
-    width: 40,
-  },
+
   shadow: {
     shadowColor: 'black',
     shadowOffset: {
@@ -53,6 +50,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  roundBtnSize: {
+    height: 40,
+    width: 40,
   }
 })
 
