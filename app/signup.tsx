@@ -126,7 +126,7 @@ const signup = () => {
             placeholder='Nombre Completo'
             keyboardType='default'
           />
-          {errorFullName ? <Text style={styles.error}>{errorFullName}</Text> : null}
+          {errorFullName ? <Text style={generalStyles.error}>{errorFullName}</Text> : null}
           <TextInput
             value={phoneNumber}
             onChangeText={handlePhoneChange}
@@ -134,7 +134,7 @@ const signup = () => {
             placeholder='Teléfono'
             keyboardType='numeric'
           />
-          {errorPhoneNumber ? <Text style={styles.error}>{errorPhoneNumber}</Text> : null}
+          {errorPhoneNumber ? <Text style={generalStyles.error}>{errorPhoneNumber}</Text> : null}
           <TextInput
             value={email}
             onChangeText={handleEmailChange}
@@ -142,7 +142,7 @@ const signup = () => {
             placeholder='Email'
             keyboardType='email-address'
           />
-          {errorEmail ? <Text style={styles.error}>{errorEmail}</Text> : null}
+          {errorEmail ? <Text style={generalStyles.error}>{errorEmail}</Text> : null}
           <View style={generalStyles.inputWrapper}>
             <TextInput
               value={password}
@@ -157,7 +157,7 @@ const signup = () => {
               <Ionicons name={showPassword ? 'eye-off-outline' : 'eye-outline'} size={24} color="gray" />
             </TouchableOpacity>
           </View>
-          {errorPassword ? <Text style={styles.error}>{errorPassword}</Text> : null}
+          {errorPassword ? <Text style={generalStyles.error}>{errorPassword}</Text> : null}
           <View style={generalStyles.inputWrapper}>
             <TextInput
               value={confirmPassword}
@@ -171,7 +171,7 @@ const signup = () => {
               <Ionicons name={showConfirmPassword ? 'eye-off-outline' : 'eye-outline'} size={24} color="gray" />
             </TouchableOpacity>
           </View>
-          {errorConfirmPassword ? <Text style={styles.error}>{errorConfirmPassword}</Text> : null}
+          {errorConfirmPassword ? <Text style={generalStyles.error}>{errorConfirmPassword}</Text> : null}
         </View>
 
         <View style={{ flex: 1 }} >
@@ -196,11 +196,6 @@ const signup = () => {
   )
 }
 
-const styles = StyleSheet.create({
-  error: {
-    color: 'red',
-    marginTop: 10
-  },
-})
+
 
 export default signup

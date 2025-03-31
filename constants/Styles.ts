@@ -70,4 +70,8 @@ export const generalStyles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
   },
+  error: {
+    color: 'red',
+    marginTop: 10
+  },
 });
