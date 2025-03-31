@@ -15,14 +15,14 @@ const CustomHeader = () => {
       <View style={[styles.container, styles.shadow]}>
         <Link href='/(auth)/(profile)/help' asChild>
           <TouchableOpacity>
-            <Text style={[generalStyles.roundBtn, styles.shadow, styles.roundBtnSize]}>
+            <Text style={[generalStyles.roundCornerBtn, styles.shadow, styles.roundBtnSize]}>
               <Ionicons name="help" size={20} color={Colors.dark} />
             </Text>
           </TouchableOpacity>
         </Link>
         <Link href='/(auth)/(profile)/profile' asChild>
           <TouchableOpacity>
-            <Text style={[generalStyles.roundBtn, styles.shadow, styles.roundBtnSize]}>DM</Text>
+            <Text style={[generalStyles.roundCornerBtn, styles.shadow, styles.roundBtnSize]}>DM</Text>
           </TouchableOpacity>
         </Link>
       </View>

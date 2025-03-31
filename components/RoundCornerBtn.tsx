@@ -4,16 +4,16 @@ import { Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-type CircleBtnProps = {
+type RoundCornerBtnProps = {
   text: string;
   icon: typeof Ionicons.defaultProps;
   onPress?: () => void;
 }
 
-const CircleBtn = ({ text, icon, onPress }: CircleBtnProps) => {
+const RoundCornerBtn = ({ text, icon, onPress }: RoundCornerBtnProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={styles.roundBtn}>
+      <View style={styles.btn}>
         <Ionicons name={icon} size={25} color={Colors.dark} />
       </View>
       <Text style={styles.label}>{text}</Text>
@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10
   },
-  roundBtn: {
+  btn: {
     width: 50,
     height: 50,
-    borderRadius: 30,
+    borderRadius: 10,
     backgroundColor: Colors.lightGray,
     justifyContent: 'center',
     alignItems: 'center'
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default CircleBtn
+export default RoundCornerBtn

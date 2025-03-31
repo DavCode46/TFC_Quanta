@@ -61,13 +61,13 @@ export const generalStyles = StyleSheet.create({
     right: 10,
     top: 22,
   },
-  roundBtn: {
+  roundCornerBtn: {
     flex: 1,
     textAlign: 'center',
     verticalAlign: 'middle',
     backgroundColor: Colors.lightGray,
     color: Colors.dark,
-    borderRadius: 50,
+    borderRadius: 10,
     padding: 10,
   },
 });
