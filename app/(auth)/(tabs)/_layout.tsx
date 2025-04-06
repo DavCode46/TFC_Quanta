@@ -44,7 +44,7 @@ const TabsLayout = () => {
             <MaterialIcons name="account-balance" size={size} color={color} />
           ),
           headerTransparent: true,
-          header: () => <CustomHeader />
+          header: () => <CustomHeader />,
         }}
       />
       <Tabs.Screen
