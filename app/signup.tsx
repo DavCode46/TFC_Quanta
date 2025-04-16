@@ -76,7 +76,7 @@ const signup = () => {
   };
 
 
-  // Estados para los errores
+
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = useState('');

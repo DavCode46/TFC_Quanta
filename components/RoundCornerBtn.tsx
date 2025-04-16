@@ -1,7 +1,7 @@
 import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 type RoundCornerBtnProps = {
@@ -10,16 +10,21 @@ type RoundCornerBtnProps = {
   onPress?: () => void;
 }
 
-const RoundCornerBtn = ({ text, icon, onPress }: RoundCornerBtnProps) => {
-  return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={styles.btn}>
-        <Ionicons name={icon} size={25} color={Colors.dark} />
-      </View>
-      <Text style={styles.label}>{text}</Text>
-    </TouchableOpacity>
-  )
-}
+const RoundCornerBtn = forwardRef<React.ElementRef<typeof TouchableOpacity>, RoundCornerBtnProps>(
+  ({ text, icon, ...props }, ref) => {
+    return (
+      <TouchableOpacity ref={ref} style={styles.container} {...props}>
+        <View style={styles.btn}>
+          <Ionicons name={icon} size={25} color={Colors.dark} />
+        </View>
+        <Text style={styles.label}>{text}</Text>
+      </TouchableOpacity>
+    );
+  }
+);
+
+// Evita problemas con nombres de componentes anónimos
+RoundCornerBtn.displayName = 'RoundCornerBtn';
 
 const styles = StyleSheet.create({
   container: {

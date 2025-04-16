@@ -2,24 +2,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
-
 interface AuthContextType {
   user: any;
   login: (userData: any) => void;
   logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | null>(null);
+
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const token = await AsyncStorage.getItem('token');
-      if (token) {
-        setUser({ token });
+      const userData = await AsyncStorage.getItem('user');
+      if (userData) {
+        setUser(JSON.parse(userData));
       }
+      setLoading(false);
     };
 
     checkLoginStatus();
@@ -27,18 +29,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (userData: any) => {
     setUser(userData);
-    console.log('-'.repeat(100))
-    console.log(userData)
-    console.log('-'.repeat(100))
-    await AsyncStorage.setItem('token', userData.token);
+    await AsyncStorage.setItem('user', JSON.stringify(userData));
     router.push('/(auth)/(tabs)/home');
   };
 
   const logout = async () => {
     setUser(null);
-    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('user');
     router.push('/login');
   };
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
@@ -49,7 +52,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within an AuthProvider');
+  if (context === null) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
   return context;
 };
 
