@@ -1,3 +1,4 @@
+import { env } from '@/app/config/envConfig';
 import AuthContext, { useAuth } from '@/app/context/AuthContext';
 import transactions from '@/app/data/dummyData.js';
 import RoundCornerBtn from '@/components/RoundCornerBtn';
@@ -10,14 +11,21 @@ import { Link } from 'expo-router';
 import React, { useContext, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+
+
 const home = () => {
+
+
   const [balance, setBalance] = useState(1420)
   const  [account, setAccount] = useState('')
   const [dbtransactions, setDbTransactions] = useState(transactions)
   const { user } = useAuth()
 
+
   useEffect(() => {
-    console.log('User:', user);
+
+
+
     if (!user || !user.id) {
       console.log('No user found');
       return;
