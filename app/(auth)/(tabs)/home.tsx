@@ -1,19 +1,85 @@
+import { env } from '@/app/config/envConfig';
+import AuthContext, { useAuth } from '@/app/context/AuthContext';
 import transactions from '@/app/data/dummyData.js';
 import RoundCornerBtn from '@/components/RoundCornerBtn';
 import Colors from '@/constants/Colors';
 import { generalStyles } from '@/constants/Styles';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import axios from 'axios';
 import { Link } from 'expo-router';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+
+
 const home = () => {
-  const balance = '1420'
+
+
+  const [balance, setBalance] = useState(1420)
+  const  [account, setAccount] = useState('')
+  const [dbtransactions, setDbTransactions] = useState(transactions)
+  const { user } = useAuth()
+
+
+  useEffect(() => {
+
+
+
+    if (!user || !user.id) {
+      console.log('No user found');
+      return;
+    }
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(
+          `http://192.168.1.104:3000/api/users/me/${user.email}`,
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${user.token}` }
+          }
+        )
+        const { username, email, phone, id} = res.data;
+      } catch (error) {
+        console.log('Error fetching user:', error);
+      }
+    }
+
+    const fetchAccount = async () => {
+      try {
+
+        const res = await axios.get(
+          `http://192.168.1.104:3000/api/accounts/get/${user.id}`,
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${user.token}` }
+          }
+        )
+        const { account } = res.data;
+
+        if (account) {
+          const { balance, account_number, status, _id: id } = account;
+
+          setBalance(balance);
+          setAccount(account_number);
+        } else {
+          console.log('No account data found');
+        }
+
+
+      } catch (error) {
+        console.log('Error fetching account:', error);
+      }
+    }
+
+    fetchUser();
+    fetchAccount();
+  }, [user]);
+
 
 
   return (
-    <ScrollView style={[generalStyles.container, { paddingTop: 60 }]}>
+    <View style={[generalStyles.container, { paddingTop: 60 }]}>
       <View style={styles.section}>
         <Text style={styles.sectionText}>{balance}</Text>
         <Text style={styles.sectionTextSmall}>€</Text>
@@ -35,7 +101,7 @@ const home = () => {
 
       <ScrollView style={{ backgroundColor: Colors.white, padding: 20, borderRadius: 10, marginBottom: 50 }}>
         <Text style={{ fontSize: 18, fontWeight: '500', marginBottom: 20 }}>Últimos movimientos</Text>
-        {transactions.slice(-8).reverse().map((transaction: any, index: number) => (
+        {dbtransactions.slice(-8).reverse().map((transaction: any, index: number) => (
           <View key={index} >
             <View style={{ flexDirection: 'column', marginBottom: 20 }}>
               <Text style={{ fontSize: 14, color: Colors.gray, marginBottom: 5 }}>
@@ -59,7 +125,7 @@ const home = () => {
           </View>
         ))}
       </ScrollView>
-    </ScrollView>
+    </View>
   )
 }
 

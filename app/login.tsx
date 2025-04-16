@@ -1,9 +1,12 @@
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
+
 import { Ionicons } from '@expo/vector-icons'
-import { Link } from 'expo-router'
+import axios from 'axios'
+import { Link, router } from 'expo-router'
 import React, { useMemo, useState } from 'react'
-import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { useAuth } from './context/AuthContext'
 
 const login = () => {
   const [email, setEmail] = useState('')
@@ -11,6 +14,7 @@ const login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [errorEmail, setErrorEmail] = useState('')
   const [errorPassword, setErrorPassword] = useState('')
+  const { login } = useAuth()
 
   const passwordSecureEntry = useMemo(() => !showPassword, [showPassword])
 
@@ -22,6 +26,32 @@ const login = () => {
   const validatePassword = (password: string) => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password)
+  }
+
+  const handleLogin = async () => {
+
+      try{
+        const res = await axios.post('http://127.0.0.1:3000/api/users/login', {
+          email,
+          password,
+        });
+
+        if(res.status === 200) {
+          Alert.alert('Inicio de sesión exitoso', 'Has iniciado sesión correctamente')
+          setData();
+          login(res.data)
+        }
+      }catch(error: any) {
+        console.log('-'.repeat(100))
+       console.log(error.response.data.error)
+        Alert.alert('Error', error.response.data.error)
+      }
+
+  }
+
+  const setData = () => {
+    setEmail('');
+    setPassword('');
   }
 
 
@@ -56,7 +86,9 @@ const login = () => {
           </View>
         </View>
 
-        <TouchableOpacity style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => { }} >
+        <TouchableOpacity style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
+          handleLogin()
+        }} >
           <Text style={generalStyles.textButton}>Iniciar sesión</Text>
         </TouchableOpacity>
 

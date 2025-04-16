@@ -1,7 +1,8 @@
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import { Ionicons } from '@expo/vector-icons'
-import { Link } from 'expo-router'
+import axios from 'axios'
+import { Link, router } from 'expo-router'
 import React, { useMemo, useState } from 'react'
 import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
 
@@ -75,7 +76,7 @@ const signup = () => {
   };
 
 
-  // Estados para los errores
+
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
@@ -111,6 +112,42 @@ const signup = () => {
     setPhoneNumber(text);
     setErrorPhoneNumber(validatePhoneNumber(text) ? '' : 'El teléfono debe tener 9 dígitos');
   };
+
+  const handleRegister = async () => {
+    if(validateUserData()) {
+      try{
+        const res = await axios.post('http://127.0.0.1:3000/api/users/register', {
+          username: fullName,
+          email,
+          password,
+          confirmPassword,
+          phone: phoneNumber,
+        });
+
+        console.log(res.data)
+
+        if(res.status === 201) {
+          Alert.alert('Registro exitoso', 'Usuario registrado correctamente')
+          setData();
+          router.push('/login');
+        }
+      }catch(error: any) {
+        console.log('-'.repeat(100))
+       console.log(error.response.data.error)
+        Alert.alert('Error', error.response.data.error)
+      }
+    }
+  }
+
+  const setData = () => {
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setFullName('');
+    setPhoneNumber('');
+  }
+
+
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}>
@@ -178,9 +215,7 @@ const signup = () => {
           <TouchableOpacity
             style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 20 }]}
             onPress={() => {
-              if (validateUserData()) {
-                Alert.alert('Registro exitoso', 'Cuenta correctamente')
-              }
+              handleRegister()
             }}
           >
             <Text style={generalStyles.textButton}>Crear cuenta</Text>
