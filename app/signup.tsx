@@ -1,3 +1,4 @@
+import { env } from '@/app/config/envConfig'
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import { Ionicons } from '@expo/vector-icons'
@@ -84,6 +85,7 @@ const signup = () => {
   const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
 
 
+
   const handleEmailChange = (text: string) => {
     setEmail(text);
     setErrorEmail(validateEmail(text) ? '' : 'Email no válido');
@@ -116,7 +118,7 @@ const signup = () => {
   const handleRegister = async () => {
     if(validateUserData()) {
       try{
-        const res = await axios.post('http://127.0.0.1:3000/api/users/register', {
+        const res = await axios.post(`${env.API_URL}/users/register`, {
           username: fullName,
           email,
           password,

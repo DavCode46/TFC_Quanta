@@ -19,12 +19,12 @@ const home = () => {
   const [balance, setBalance] = useState(1420)
   const  [account, setAccount] = useState('')
   const [dbtransactions, setDbTransactions] = useState(transactions)
-  const { user } = useAuth()
+  const { user, setAccountData } = useAuth()
 
 
   useEffect(() => {
 
-
+    console.log('User:', user)
 
     if (!user || !user.id) {
       console.log('No user found');
@@ -33,7 +33,7 @@ const home = () => {
     const fetchUser = async () => {
       try {
         const res = await axios.get(
-          `http://192.168.1.104:3000/api/users/me/${user.email}`,
+          `${env.API_URL}/users/me/${user.email}`,
           {
             withCredentials: true,
             headers: { Authorization: `Bearer ${user.token}` }
@@ -49,7 +49,7 @@ const home = () => {
       try {
 
         const res = await axios.get(
-          `http://192.168.1.104:3000/api/accounts/get/${user.id}`,
+          `${env.API_URL}/accounts/get/${user.id}`,
           {
             withCredentials: true,
             headers: { Authorization: `Bearer ${user.token}` }
@@ -59,7 +59,7 @@ const home = () => {
 
         if (account) {
           const { balance, account_number, status, _id: id } = account;
-
+          setAccountData(res.data);
           setBalance(balance);
           setAccount(account_number);
         } else {

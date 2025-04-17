@@ -1,7 +1,10 @@
+import { env } from '@/app/config/envConfig'
+import { useAuth } from '@/app/context/AuthContext'
 import RadioButton from '@/components/RadioButton'
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 const Add = () => {
@@ -11,11 +14,10 @@ const Add = () => {
 
   const [errorAmount, setErrorAmount] = useState('')
   const [errorAccount, setErrorAccount] = useState('')
+  const { accountContext, user } = useAuth()
 
   const validateAccount = (account: string): boolean => {
-    // Elimina espacios para permitir formatos con separadores
     const normalized = account.replace(/\s/g, '');
-    // Regex para IBAN español: "ES" seguido de 22 dígitos (total 24 caracteres)
     const regex = /^ES\d{22}$/;
     return regex.test(normalized);
   };
@@ -51,6 +53,23 @@ const Add = () => {
     setAccount('')
     setErrorAccount('')
     setErrorAmount('')
+  }
+
+  const handleAddMoney = async () => {
+    try{
+      const res = await axios.post(`${env.API_URL}/transactions/add`, {
+        amount: amount,
+        account_number: accountType === 'myAccount' ? accountContext.account.account_number : account
+      },
+    {
+      withCredentials: true,
+      headers: { Authorization: `Bearer: ${user.token}` }
+    }
+    )
+    }catch(error) {
+      console.log('Error:', error)
+      Alert.alert('Error', 'Ha ocurrido un error al ingresar el dinero')
+    }
   }
 
 
@@ -89,6 +108,7 @@ const Add = () => {
           if (validateUserData()) {
             Alert.alert('Ingreso exitoso', `Se ha ingresado ${amount}€ a la cuenta`)
             setData()
+            handleAddMoney();
           }
         }}>
           <Text style={{ color: Colors.white, fontSize: 20, fontWeight: '600' }} >Ingresar</Text>

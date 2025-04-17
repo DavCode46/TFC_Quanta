@@ -4,7 +4,9 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 
 interface AuthContextType {
   user: any;
+  accountContext: any;
   login: (userData: any) => void;
+  setAccountData: (accountData: any) => void;
   logout: () => void;
 }
 
@@ -13,13 +15,18 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<any>(null);
+  const [accountContext, setAccountContext] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       const userData = await AsyncStorage.getItem('user');
+      const accountData = await AsyncStorage.getItem('account');
       if (userData) {
         setUser(JSON.parse(userData));
+      }
+      if (accountData) {
+        setAccountContext(JSON.parse(accountData));
       }
       setLoading(false);
     };
@@ -33,8 +40,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     router.push('/(auth)/(tabs)/home');
   };
 
+  const setAccountData = async (accountData: any) => {
+    setAccountContext(accountData);
+    await AsyncStorage.setItem('account', JSON.stringify(accountData));
+  }
+
   const logout = async () => {
     setUser(null);
+    setAccountContext(null);
+    await AsyncStorage.removeItem('account');
     await AsyncStorage.removeItem('user');
     router.push('/login');
   };
@@ -44,7 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, accountContext, login, setAccountData, logout }}>
       {children}
     </AuthContext.Provider>
   );
