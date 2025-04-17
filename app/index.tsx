@@ -10,6 +10,8 @@ const index = () => {
   const [assets] = useAssets([require('@/assets/videos/intro.mp4')])
 
   // return <Redirect href={'/(auth)/(tabs)/home'} />
+  return <Redirect href={'/(auth)/(profile)/profile'} />
+  /*
   return (
     <View style={styles.container}>
       {assets && (
@@ -47,6 +49,7 @@ const index = () => {
 
     </View>
   )
+    */
 }
 
 const styles = StyleSheet.create({

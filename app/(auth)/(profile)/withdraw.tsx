@@ -4,6 +4,7 @@ import RadioButton from '@/components/RadioButton'
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import axios from 'axios'
+import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
@@ -54,6 +55,7 @@ const Withdraw = () => {
          Alert.alert(res.data.message, `Has retirado ${res.data.transaction.amount} €`)
          setData()
          triggerReload()
+         router.push('/(auth)/(tabs)/home')
        }
        }catch(error: any) {
         Alert.alert('Error al retirar dinero', error.response.data.error)

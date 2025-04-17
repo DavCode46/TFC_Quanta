@@ -17,7 +17,7 @@ const RoundCornerBtn = forwardRef<React.ElementRef<typeof TouchableOpacity>, Rou
         <View style={styles.btn}>
           <MaterialIcons name={icon} size={25} color={Colors.dark} />
         </View>
-        <Text style={styles.label}>{text}</Text>
+         <Text style={styles.label}>{text}</Text>
       </TouchableOpacity>
     );
   }
