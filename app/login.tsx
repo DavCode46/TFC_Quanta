@@ -1,13 +1,13 @@
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 
+import { env } from '@/app/config/envConfig'
 import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import { Link, router } from 'expo-router'
 import React, { useMemo, useState } from 'react'
 import { Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useAuth } from './context/AuthContext'
-
 const login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -18,20 +18,10 @@ const login = () => {
 
   const passwordSecureEntry = useMemo(() => !showPassword, [showPassword])
 
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email)
-  }
-
-  const validatePassword = (password: string) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return passwordRegex.test(password)
-  }
-
   const handleLogin = async () => {
 
       try{
-        const res = await axios.post('http://127.0.0.1:3000/api/users/login', {
+        const res = await axios.post(`${env.API_URL}/users/login`, {
           email,
           password,
         });

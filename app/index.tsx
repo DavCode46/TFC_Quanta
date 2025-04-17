@@ -10,6 +10,8 @@ const index = () => {
   const [assets] = useAssets([require('@/assets/videos/intro.mp4')])
 
   // return <Redirect href={'/(auth)/(tabs)/home'} />
+
+
   return (
     <View style={styles.container}>
       {assets && (
@@ -28,7 +30,7 @@ const index = () => {
 
       <View style={styles.buttonsWrapper}>
         <View style={styles.buttonContainer}>
-          <Link href={'/login'} style={[generalStyles.pillButton, { backgroundColor: Colors.dark, flex: 1 }]} asChild>
+          <Link href={'/Login'} style={[generalStyles.pillButton, { backgroundColor: Colors.dark, flex: 1 }]} asChild>
             <TouchableOpacity>
               <Text style={[styles.textButton, { color: Colors.white }]}>Iniciar sesión</Text>
             </TouchableOpacity>
@@ -36,17 +38,16 @@ const index = () => {
         </View>
 
         <View style={styles.buttonContainer}>
-          <Link href={'/signup'} style={[generalStyles.pillButton, { backgroundColor: Colors.white, flex: 1 }]} asChild>
+          <Link href={'/SignUp'} style={[generalStyles.pillButton, { backgroundColor: Colors.white, flex: 1 }]} asChild>
             <TouchableOpacity>
               <Text style={styles.textButton}>Crear cuenta</Text>
             </TouchableOpacity>
           </Link>
         </View>
       </View>
-
-
     </View>
   )
+
 }
 
 const styles = StyleSheet.create({

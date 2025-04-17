@@ -8,14 +8,17 @@ import { router } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
-const Add = () => {
+const Transfers = () => {
   const [amount, setAmount] = useState(0.0)
   const [account, setAccount] = useState('')
+  const [subject, setSubject] = useState('')
   const [accountType, setAccountType] = useState('myAccount')
+
 
   const [errorAmount, setErrorAmount] = useState('')
   const [errorAccount, setErrorAccount] = useState('')
-  const { triggerReload, accountContext, user } = useAuth()
+  const [errorSubject, setErrorSubject] = useState('')
+  const { accountContext,triggerReload, user } = useAuth()
 
   const validateAccount = (account: string): boolean => {
     const normalized = account.replace(/\s/g, '');
@@ -49,6 +52,11 @@ const Add = () => {
     setErrorAmount(amount > 0 ? '' : 'La cantidad debe ser mayor a 0')
   }
 
+  const handleSubjectChange = (subject: string) => {
+    setSubject(subject)
+    setErrorSubject(subject.length > 0 ? '' : 'El asunto es obligatorio')
+  }
+
   const setData = () => {
     setAmount(0)
     setAccount('')
@@ -56,34 +64,35 @@ const Add = () => {
     setErrorAmount('')
   }
 
-  const handleAddMoney = async () => {
+  const handleTransferMoney = async () => {
     try{
-      const res = await axios.post(`${env.API_URL}/transactions/add`, {
+      const res = await axios.post(`${env.API_URL}/transactions/transfer`, {
         amount: amount,
-        account_number: accountType === 'myAccount' ? accountContext.account.account_number : account
+        origin_account: accountContext.account.account_number,
+        destination_account: account,
       },
     {
       withCredentials: true,
       headers: { Authorization: `Bearer: ${user.token}` }
     }
     )
-     if(res.status === 200) {
-          Alert.alert(res.data.message, `Has ingresado ${res.data.transaction.amount} €`)
-          setData()
-          triggerReload()
-          router.push('/(auth)/(tabs)/home')
-        }
-        }catch(error: any) {
-         Alert.alert('Error al realizar el ingreso', error.response.data.error)
-      }
+    if(res.status === 200) {
+      Alert.alert(res.data.message, `Has transferido ${res.data.transaction.amount} €`)
+      setData()
+      triggerReload()
+       router.push('/(auth)/(tabs)/home')
+    }
+    }catch(error: any) {
+     Alert.alert('Error al realizar la transferencia', error.response.data.error)
+    }
   }
 
 
   return (
     <View style={[generalStyles.container]}>
-      <Text style={generalStyles.header}>Ingresar dinero</Text>
+      <Text style={generalStyles.header}>Transferir dinero</Text>
       <View style={{ marginTop: 20 }}>
-          <Text>Ingresa la cantidad:</Text>
+      <Text>Ingresa la cantidad:</Text>
         <TextInput
           style={generalStyles.input}
           placeholder="Cantidad"
@@ -92,13 +101,21 @@ const Add = () => {
           onChangeText={text => handleAmountChange(parseFloat(text) || 0)}
         />
         {errorAmount && amount <= 0 ? <Text style={generalStyles.error}>{errorAmount}</Text> : null}
-        <Text style={generalStyles.header}>Selecciona la cuenta</Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }}>
-          <RadioButton selected={accountType === 'myAccount'} onPress={() => setAccountType('myAccount')}>Mi cuenta</RadioButton>
-          <RadioButton selected={accountType === 'otherAccount'} onPress={() => setAccountType('otherAccount')}>Otra cuenta</RadioButton>
+
+        <View style={generalStyles.inputContainer}>
+        <Text>Ingresa el asunto:</Text>
+        <TextInput
+              style={generalStyles.input}
+              placeholder="Asunto"
+              keyboardType="default"
+              value={subject}
+              onChangeText={handleSubjectChange}
+            />
+            {errorSubject ? <Text style={generalStyles.error}>{errorSubject}</Text> : null}
         </View>
 
-        {accountType === 'otherAccount' && (
+
+
           <View style={generalStyles.inputContainer}>
             <Text>Ingresa el número de cuenta:</Text>
             <TextInput
@@ -110,17 +127,17 @@ const Add = () => {
             />
             {errorAccount ? <Text style={generalStyles.error}>{errorAccount}</Text> : null}
           </View>
-        )}
+
         <TouchableOpacity style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
           if (validateUserData()) {
-            handleAddMoney();
+            handleTransferMoney();
           }
         }}>
-          <Text style={{ color: Colors.white, fontSize: 20, fontWeight: '600' }} >Ingresar</Text>
+          <Text style={{ color: Colors.white, fontSize: 20, fontWeight: '600' }} >Transferir</Text>
         </TouchableOpacity>
       </View>
     </View>
   )
 }
 
-export default Add
+export default Transfers

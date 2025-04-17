@@ -1,3 +1,5 @@
+import { env } from '@/app/config/envConfig'
+import { validateEmail, validatePassword, validatePhoneNumber } from '@/app/utils/validations'
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import { Ionicons } from '@expo/vector-icons'
@@ -19,20 +21,6 @@ const signup = () => {
   const passwordSecureTextEntry = useMemo(() => !showPassword, [showPassword])
   const confirmPasswordSecureTextEntry = useMemo(() => !showConfirmPassword, [showConfirmPassword])
 
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email)
-  }
-
-  const validatePassword = (password: string) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return passwordRegex.test(password)
-  }
-
-  const validatePhoneNumber = (phoneNumber: string) => {
-    const phoneNumberRegex = /^\d{9}$/;
-    return phoneNumberRegex.test(phoneNumber)
-  }
 
   const validateUserData = () => {
     let isValid = true;
@@ -84,6 +72,7 @@ const signup = () => {
   const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
 
 
+
   const handleEmailChange = (text: string) => {
     setEmail(text);
     setErrorEmail(validateEmail(text) ? '' : 'Email no válido');
@@ -116,7 +105,7 @@ const signup = () => {
   const handleRegister = async () => {
     if(validateUserData()) {
       try{
-        const res = await axios.post('http://127.0.0.1:3000/api/users/register', {
+        const res = await axios.post(`${env.API_URL}/users/register`, {
           username: fullName,
           email,
           password,
