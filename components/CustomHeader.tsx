@@ -13,14 +13,14 @@ const CustomHeader = () => {
   return (
     <BlurView intensity={60} tint={'light'} style={{ paddingTop: adjustedTop }}>
       <View style={[styles.container, styles.shadow]}>
-        <Link href='/(auth)/(profile)/help' asChild>
+        <Link href='/(auth)/(profile)/Help' asChild>
           <TouchableOpacity>
             <Text style={[generalStyles.roundCornerBtn, styles.shadow, styles.roundBtnSize]}>
               <Ionicons name="help" size={20} color={Colors.dark} />
             </Text>
           </TouchableOpacity>
         </Link>
-        <Link href='/(auth)/(profile)/profile' asChild>
+        <Link href='/(auth)/(profile)/Profile' asChild>
           <TouchableOpacity>
             <Text style={[generalStyles.roundCornerBtn, styles.shadow, styles.roundBtnSize]}>DM</Text>
           </TouchableOpacity>

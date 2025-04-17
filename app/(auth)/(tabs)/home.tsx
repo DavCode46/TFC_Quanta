@@ -1,7 +1,7 @@
 import { env } from '@/app/config/envConfig';
 import AuthContext, { useAuth } from '@/app/context/AuthContext';
 import transactions from '@/app/data/dummyData.js';
-import { determineTransactionIcon, formatDate } from '@/app/utils/utils';
+import { determineTransactionIcon, formatDate } from '@/app/utils/Utils';
 import RoundCornerBtn from '@/components/RoundCornerBtn';
 import Colors from '@/constants/Colors';
 import { generalStyles } from '@/constants/Styles';
@@ -81,23 +81,32 @@ const home = () => {
     fetchData();
   }, [user, reloadFlag]);
 
+  if(loading) {
+    return (
+      <View style={[generalStyles.container, { paddingTop: 60 }]}>
+        <ActivityIndicator size="large" color={Colors.royalBlue} />
+      </View>
+    )
+  }
+
   return (
+
     <View style={[generalStyles.container, { paddingTop: 60 }]}>
       <View style={styles.section}>
         <Text style={styles.sectionText}>{balance}</Text>
         <Text style={styles.sectionTextSmall}>€</Text>
       </View>
       <View style={styles.actionsContainer}>
-        <Link href='/(auth)/(profile)/add' asChild>
+        <Link href='/(auth)/(profile)/Add' asChild>
           <RoundCornerBtn text='Ingresar' icon='add' onPress={() => { }} />
         </Link>
-        <Link href='/(auth)/(profile)/withdraw' asChild>
+        <Link href='/(auth)/(profile)/Withdraw' asChild>
           <RoundCornerBtn text='Retirar' icon='remove' onPress={() => { }} />
         </Link>
-        <Link href='/(auth)/(profile)/transactions' asChild>
+        <Link href='/(auth)/(profile)/Transactions' asChild>
           <RoundCornerBtn text='Movimientos' icon='currency-exchange' onPress={() => { }} />
         </Link>
-        <Link href='/(auth)/(profile)/transfers' asChild>
+        <Link href='/(auth)/(profile)/Transfers' asChild>
           <RoundCornerBtn text='Transferencias' icon='swap-horiz' onPress={() => { }} />
         </Link>
       </View>
