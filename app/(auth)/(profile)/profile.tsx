@@ -104,6 +104,47 @@ const profile = () => {
     }
   }
 
+  const validateUserData = () => {
+      let isValid = true;
+
+      if (!validateEmail(email)) {
+        setErrorEmail('Email no válido');
+        isValid = false;
+      } else {
+        setErrorEmail('');
+      }
+
+      if (!validatePassword(newPassword)) {
+        setErrorNewPassword('La contraseña debe tener 8 caracteres, una mayúscula, una minúscula, un número y un símbolo');
+        isValid = false;
+      } else {
+        setErrorNewPassword('');
+      }
+
+      if (!fullName.trim()) {
+        setErrorFullName('Nombre es obligatorio');
+        isValid = false;
+      } else {
+        setErrorFullName('');
+      }
+
+      if (!validatePhoneNumber(phoneNumber)) {
+        setErrorPhoneNumber('El teléfono debe tener 9 dígitos');
+        isValid = false;
+      } else {
+        setErrorPhoneNumber('');
+      }
+
+      if (newPassword !== confirmNewPassword) {
+        setErrorConfirmNewPassword('Las contraseñas no coinciden');
+        isValid = false;
+      } else {
+        setErrorConfirmNewPassword('');
+      }
+
+      return isValid;
+    };
+
   return (
     <View style={[generalStyles.container]}>
       <View style={styles.container}>
@@ -124,6 +165,7 @@ const profile = () => {
             style={generalStyles.input}
             placeholder='Nombre completo'
             keyboardType='default'
+            editable={false}
           />
           {errorFullName ? <Text style={generalStyles.error}>{errorFullName}</Text> : null}
         </View>
@@ -150,7 +192,7 @@ const profile = () => {
         <View style={generalStyles.inputWrapper}>
             <TextInput
               value={currentPassword}
-              onChangeText={handleNewPasswordChange}
+              onChangeText={handleCurrentPasswordChange}
               style={generalStyles.input}
               placeholder='Contraseña actual'
               secureTextEntry={currentPasswordSecureTextEntry}
