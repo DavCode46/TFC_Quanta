@@ -1,6 +1,9 @@
+import { env } from '@/app/config/envConfig'
+import { useAuth } from '@/app/context/AuthContext'
 import RadioButton from '@/components/RadioButton'
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
@@ -8,6 +11,8 @@ const Withdraw = () => {
   const [amount, setAmount] = useState(0.0)
 
   const [errorAmount, setErrorAmount] = useState('')
+
+  const { accountContext, user } = useAuth()
 
 
   const validateUserData = () => {
@@ -34,6 +39,28 @@ const Withdraw = () => {
   }
 
 
+  const handleWithdrawMoney = async () => {
+    try{
+      const res = await axios.post(`${env.API_URL}/transactions/withdraw`, {
+        amount: amount,
+        account_number: accountContext.account.account_number
+      },
+    {
+      withCredentials: true,
+      headers: { Authorization: `Bearer: ${user.token}` }
+    }
+    )
+    if(res.status === 200) {
+         Alert.alert(res.data.message, `Has retirado ${res.data.transaction.amount} €`)
+         setData()
+       }
+       }catch(error: any) {
+        Alert.alert('Error al retirar dinero', error.response.data.error)
+       }
+  }
+
+
+
   return (
     <View style={[generalStyles.container]}>
       <Text style={generalStyles.header}>Retirar dinero</Text>
@@ -50,8 +77,7 @@ const Withdraw = () => {
       <View style={{ marginTop: 20 }}>
         <TouchableOpacity style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
           if (validateUserData()) {
-            Alert.alert('Retiro exitoso', `Se ha retirado ${amount}€ de su cuenta`)
-            setData()
+            handleWithdrawMoney()
           }
         }}>
           <Text style={{ color: Colors.white, fontSize: 20, fontWeight: '600' }} >Retirar</Text>

@@ -94,7 +94,7 @@ const home = () => {
         <Link href='/(auth)/(profile)/transactions' asChild>
           <RoundCornerBtn text='Movimientos' icon='cash-outline' onPress={() => { }} />
         </Link>
-        <Link href='/(auth)/(profile)/cards' asChild>
+        <Link href='/(auth)/(profile)/transfers' asChild>
           <RoundCornerBtn text='Tarjetas' icon='card-outline' onPress={() => { }} />
         </Link>
       </View>
