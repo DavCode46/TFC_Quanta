@@ -19,62 +19,77 @@ const home = () => {
   const [balance, setBalance] = useState(1420)
   const  [account, setAccount] = useState('')
   const [dbtransactions, setDbTransactions] = useState(transactions)
-  const { user,accountContext, setAccountData } = useAuth()
-
+  const { user,accountContext, setAccountData, reloadFlag } = useAuth()
 
   useEffect(() => {
-
-    console.log('User:', user)
-
-    if (!user || !user.id) {
-      console.log('No user found');
-      return;
-    }
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get(
-          `${env.API_URL}/users/me/${user.email}`,
-          {
-            withCredentials: true,
-            headers: { Authorization: `Bearer ${user.token}` }
-          }
-        )
-        const { username, email, phone, id} = res.data;
-      } catch (error) {
-        console.log('Error fetching user:', error);
+    const fetchData = async () => {
+      if (!user || !user.id) {
+        console.log('No user found');
+        return;
       }
-    }
 
-    const fetchAccount = async () => {
       try {
 
-        const res = await axios.get(
-          `${env.API_URL}/accounts/get/${user.id}`,
-          {
-            withCredentials: true,
-            headers: { Authorization: `Bearer ${user.token}` }
-          }
-        )
-        const { account } = res.data;
+        const userRes = await axios.get(`${env.API_URL}/users/me/${user.email}`, {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${user.token}` }
+        });
+
+        const accountRes = await axios.get(`${env.API_URL}/accounts/get/${user.id}`, {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${user.token}` }
+        });
+
+        const { account } = accountRes.data;
 
         if (account) {
           const { balance, account_number, status, _id: id } = account;
-          setAccountData(res.data);
+          setAccountData(accountRes.data);
           setBalance(balance);
           setAccount(account_number);
         } else {
           console.log('No account data found');
+          return;
         }
 
 
-      } catch (error) {
-        console.log('Error fetching account:', error);
-      }
-    }
+        const transactionsRes = await axios.get(`${env.API_URL}/transactions/account/${user.email}`, {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
 
-    fetchUser();
-    fetchAccount();
-  }, [user, accountContext, setAccountData]);
+        setDbTransactions(transactionsRes.data.transactions);
+
+      } catch (error: any) {
+        console.error('Error durante la carga de datos:', error.response?.data?.error || error.message);
+      }
+    };
+
+    fetchData();
+  }, [user, reloadFlag]);
+
+  const formatDate = (timestamp: any) => {
+    const date = new Date(timestamp);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
+
+  const determineTransactionIcon = (type: string) => {
+    switch (type) {
+      case 'ingreso':
+        return <Ionicons name='add' size={20} color='black' />;
+      case 'transferencia':
+        return <MaterialIcons name='swap-horiz' size={20} color='black' />;
+      case 'retirada':
+        return <Ionicons name='remove' size={20} color='black' />;
+      default:
+        return null;
+    }
+  }
+
 
 
 
@@ -86,16 +101,16 @@ const home = () => {
       </View>
       <View style={styles.actionsContainer}>
         <Link href='/(auth)/(profile)/add' asChild>
-          <RoundCornerBtn text='Ingresar' icon='add-outline' onPress={() => { }} />
+          <RoundCornerBtn text='Ingresar' icon='add' onPress={() => { }} />
         </Link>
         <Link href='/(auth)/(profile)/withdraw' asChild>
-          <RoundCornerBtn text='Retirar' icon='remove-outline' onPress={() => { }} />
+          <RoundCornerBtn text='Retirar' icon='remove' onPress={() => { }} />
         </Link>
         <Link href='/(auth)/(profile)/transactions' asChild>
-          <RoundCornerBtn text='Movimientos' icon='cash-outline' onPress={() => { }} />
+          <RoundCornerBtn text='Movimientos' icon='currency-exchange' onPress={() => { }} />
         </Link>
         <Link href='/(auth)/(profile)/transfers' asChild>
-          <RoundCornerBtn text='Tarjetas' icon='card-outline' onPress={() => { }} />
+          <RoundCornerBtn text='Transferencias' icon='swap-horiz' onPress={() => { }} />
         </Link>
       </View>
 
@@ -105,16 +120,16 @@ const home = () => {
           <View key={index} >
             <View style={{ flexDirection: 'column', marginBottom: 20 }}>
               <Text style={{ fontSize: 14, color: Colors.gray, marginBottom: 5 }}>
-                {transaction.fecha}
+                {formatDate(transaction.createdAt)}
               </Text>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomColor: Colors.lightGray, borderBottomWidth: 1, paddingVertical: 10 }}>
                 <Text style={{ fontSize: 16, fontWeight: '500' }}>
-                  {transaction.descripcion}
+                  {transaction.type}
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', gap: 5 }}>
-                  {transaction.monto > 0 ? <Ionicons name='add' size={20} color='black' /> : <Ionicons name='remove' size={20} color='black' />}
+                  {determineTransactionIcon(transaction.type)}
                   <Text style={{ fontSize: 16, fontWeight: '500' }}>
-                    {`${Math.abs(transaction.monto.toFixed(2))}`}
+                  {isNaN(Number(transaction.amount)) ? '0.00' : `${Math.abs(Number(transaction.amount)).toFixed(2)}`}
                   </Text>
                   <Text style={{ fontSize: 12 }}>
                     €

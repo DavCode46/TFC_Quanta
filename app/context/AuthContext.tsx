@@ -8,15 +8,17 @@ interface AuthContextType {
   login: (userData: any) => void;
   setAccountData: (accountData: any) => void;
   logout: () => void;
+  reloadFlag: boolean;
+  triggerReload: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
-
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<any>(null);
   const [accountContext, setAccountContext] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [reloadFlag, setReloadFlag] = useState<boolean>(false);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -43,7 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const setAccountData = async (accountData: any) => {
     setAccountContext(accountData);
     await AsyncStorage.setItem('account', JSON.stringify(accountData));
-  }
+  };
 
   const logout = async () => {
     setUser(null);
@@ -53,12 +55,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     router.push('/login');
   };
 
+  const triggerReload = () => {
+    setReloadFlag((prev) => !prev);
+  };
+
   if (loading) {
     return null;
   }
 
   return (
-    <AuthContext.Provider value={{ user, accountContext, login, setAccountData, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        accountContext,
+        login,
+        setAccountData,
+        logout,
+        reloadFlag,
+        triggerReload,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

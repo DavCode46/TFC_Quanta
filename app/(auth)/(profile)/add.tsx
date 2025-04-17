@@ -14,7 +14,7 @@ const Add = () => {
 
   const [errorAmount, setErrorAmount] = useState('')
   const [errorAccount, setErrorAccount] = useState('')
-  const { accountContext, user } = useAuth()
+  const { triggerReload, accountContext, user } = useAuth()
 
   const validateAccount = (account: string): boolean => {
     const normalized = account.replace(/\s/g, '');
@@ -69,6 +69,7 @@ const Add = () => {
      if(res.status === 200) {
           Alert.alert(res.data.message, `Has ingresado ${res.data.transaction.amount} €`)
           setData()
+          triggerReload()
         }
         }catch(error: any) {
          Alert.alert('Error al realizar el ingreso', error.response.data.error)
@@ -80,6 +81,7 @@ const Add = () => {
     <View style={[generalStyles.container]}>
       <Text style={generalStyles.header}>Ingresar dinero</Text>
       <View style={{ marginTop: 20 }}>
+          <Text>Ingresa la cantidad:</Text>
         <TextInput
           style={generalStyles.input}
           placeholder="Cantidad"

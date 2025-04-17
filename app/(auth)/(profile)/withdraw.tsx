@@ -12,7 +12,7 @@ const Withdraw = () => {
 
   const [errorAmount, setErrorAmount] = useState('')
 
-  const { accountContext, user } = useAuth()
+  const { accountContext,triggerReload, user } = useAuth()
 
 
   const validateUserData = () => {
@@ -53,6 +53,7 @@ const Withdraw = () => {
     if(res.status === 200) {
          Alert.alert(res.data.message, `Has retirado ${res.data.transaction.amount} €`)
          setData()
+         triggerReload()
        }
        }catch(error: any) {
         Alert.alert('Error al retirar dinero', error.response.data.error)
@@ -65,6 +66,7 @@ const Withdraw = () => {
     <View style={[generalStyles.container]}>
       <Text style={generalStyles.header}>Retirar dinero</Text>
       <View style={{ marginTop: 20 }}>
+          <Text>Ingresa la cantidad:</Text>
         <TextInput
           style={generalStyles.input}
           placeholder="Cantidad"
