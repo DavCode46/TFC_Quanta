@@ -19,7 +19,7 @@ const home = () => {
   const [balance, setBalance] = useState(1420)
   const  [account, setAccount] = useState('')
   const [dbtransactions, setDbTransactions] = useState(transactions)
-  const { user, setAccountData } = useAuth()
+  const { user,accountContext, setAccountData } = useAuth()
 
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const home = () => {
 
     fetchUser();
     fetchAccount();
-  }, [user]);
+  }, [user, accountContext, setAccountData]);
 
 
 
