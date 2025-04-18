@@ -1,4 +1,4 @@
-import { env } from '@/app/config/envConfig'
+import env from '@/app/config/envConfig'
 import { useAuth } from '@/app/context/AuthContext'
 import RadioButton from '@/components/RadioButton'
 import Colors from '@/constants/Colors'
@@ -71,7 +71,7 @@ const Add = () => {
           Alert.alert(res.data.message, `Has ingresado ${res.data.transaction.amount} €`)
           setData()
           triggerReload()
-          router.push('/(auth)/(tabs)/home')
+          router.push('/(auth)/(tabs)/Home')
         }
         }catch(error: any) {
          Alert.alert('Error al realizar el ingreso', error.response.data.error)

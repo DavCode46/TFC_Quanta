@@ -1,4 +1,4 @@
-import { env } from '@/app/config/envConfig'
+import env from '@/app/config/envConfig'
 import { validateEmail, validatePassword, validatePhoneNumber } from '@/app/utils/validations'
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
@@ -118,7 +118,7 @@ const signup = () => {
         if(res.status === 201) {
           Alert.alert('Registro exitoso', 'Usuario registrado correctamente')
           setData();
-          router.push('/login');
+          router.push('/Login');
         }
       }catch(error: any) {
         console.log('-'.repeat(100))
@@ -209,7 +209,7 @@ const signup = () => {
           >
             <Text style={generalStyles.textButton}>Crear cuenta</Text>
           </TouchableOpacity>
-          <Link href={'/login'} asChild>
+          <Link href={'/Login'} replace asChild>
             <TouchableOpacity>
               <Text style={generalStyles.link}>¿Ya tienes una cuenta? Inicia sesión</Text>
             </TouchableOpacity>

@@ -1,7 +1,7 @@
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 
-import { env } from '@/app/config/envConfig'
+import env from '@/app/config/envConfig'
 import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import { Link, router } from 'expo-router'
@@ -82,7 +82,7 @@ const login = () => {
           <Text style={generalStyles.textButton}>Iniciar sesión</Text>
         </TouchableOpacity>
 
-        <Link href={'/signup'} replace asChild>
+        <Link href={'/SignUp'} replace asChild>
           <TouchableOpacity>
             <Text style={generalStyles.link}>
               ¿Aún no tienes una cuenta? Regístrate

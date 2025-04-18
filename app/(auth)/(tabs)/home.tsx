@@ -1,4 +1,4 @@
-import { env } from '@/app/config/envConfig';
+import env from '@/app/config/envConfig';
 import AuthContext, { useAuth } from '@/app/context/AuthContext';
 import transactions from '@/app/data/dummyData.js';
 import { determineTransactionIcon, formatDate } from '@/app/utils/Utils';
@@ -103,11 +103,11 @@ const home = () => {
         <Link href='/(auth)/(profile)/Withdraw' asChild>
           <RoundCornerBtn text='Retirar' icon='remove' onPress={() => { }} />
         </Link>
-        <Link href='/(auth)/(profile)/Transactions' asChild>
-          <RoundCornerBtn text='Movimientos' icon='currency-exchange' onPress={() => { }} />
-        </Link>
         <Link href='/(auth)/(profile)/Transfers' asChild>
           <RoundCornerBtn text='Transferencias' icon='swap-horiz' onPress={() => { }} />
+        </Link>
+        <Link href='/(auth)/(profile)/Transactions' asChild>
+          <RoundCornerBtn text='Movimientos' icon='currency-exchange' onPress={() => { }} />
         </Link>
       </View>
 

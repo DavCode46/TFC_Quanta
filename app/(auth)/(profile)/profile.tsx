@@ -1,4 +1,4 @@
-import { env } from '@/app/config/envConfig'
+import env from '@/app/config/envConfig'
 import { useAuth } from '@/app/context/AuthContext'
 import { validateEmail, validateFullName, validatePassword, validatePhoneNumber } from '@/app/utils/validations'
 import Colors from '@/constants/Colors'
@@ -192,6 +192,10 @@ const profile = () => {
       }
     };
 
+    const handleChangeImage = () => {
+
+    }
+
     const resetData = () => {
       setFullName('')
       setEmail('')
@@ -211,6 +215,13 @@ const profile = () => {
             }
             style={styles.image}
           />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[generalStyles.pillButtonSm, {  backgroundColor: Colors.royalBlue, marginBottom: 10 }]}
+          onPress={() => {
+            handleChangeImage()
+          }}>
+          <Text style={generalStyles.textButton}>Cambiar imagen</Text>
         </TouchableOpacity>
       </View>
       <ScrollView style={generalStyles.inputContainer}>

@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (userData: any) => {
     setUser(userData);
     await AsyncStorage.setItem('user', JSON.stringify(userData));
-    router.push('/(auth)/(tabs)/home');
+    router.push('/(auth)/(tabs)/Home');
   };
 
   const setAccountData = async (accountData: any) => {
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setAccountContext(null);
     await AsyncStorage.removeItem('account');
     await AsyncStorage.removeItem('user');
-    router.push('/login');
+    router.push('/Login');
   };
 
   const triggerReload = () => {
