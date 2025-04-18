@@ -37,7 +37,7 @@ const TabsLayout = () => {
 
     >
       <Tabs.Screen
-        name="home"
+        name="Home"
         options={{
           title: 'Inicio',
           tabBarIcon: ({ size, color }) => (
@@ -48,7 +48,7 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="operations"
+        name="Operations"
         options={{
           title: 'Saldo',
           tabBarIcon: ({ size, color }) => (
@@ -59,7 +59,7 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="transfers"
+        name="Transfers"
         options={{
           title: 'Transferencias',
           tabBarIcon: ({ size, color }) => (

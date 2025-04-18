@@ -1,27 +1,36 @@
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import { useAssets } from 'expo-asset'
-import { ResizeMode, Video } from 'expo-av'
 import { Link, Redirect } from 'expo-router'
+import { useVideoPlayer, VideoView } from 'expo-video'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const index = () => {
-  const [assets] = useAssets([require('@/assets/videos/intro.mp4')])
 
   // return <Redirect href={'/(auth)/(tabs)/home'} />
+
+  const [assets] = useAssets([require('@/assets/videos/intro.mp4')])
+const videoSource = assets ? { uri: assets[0].uri }: null
+
+
+  const player = useVideoPlayer(videoSource, player => {
+      player.loop= true
+      player.muted = true
+      player.play();
+  })
 
 
   return (
     <View style={styles.container}>
       {assets && (
-        <Video
-          resizeMode={ResizeMode.COVER}
-          isMuted
-          isLooping
-          shouldPlay
-          source={{ uri: assets[0].uri }} style={styles.video}
-        />
+        <VideoView
+          player={player}
+          style={styles.video}
+          allowsFullscreen
+          allowsPictureInPicture
+          contentFit='cover'
+          />
       )}
 
       <View style={styles.headerContainer}>

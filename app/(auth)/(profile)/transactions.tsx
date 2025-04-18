@@ -1,4 +1,4 @@
-import { env } from '@/app/config/envConfig'
+import env from '@/app/config/envConfig'
 import { useAuth } from '@/app/context/AuthContext'
 import transactions from '@/app/data/dummyData'
 import { determineTransactionIcon, formatDate } from '@/app/utils/Utils'
