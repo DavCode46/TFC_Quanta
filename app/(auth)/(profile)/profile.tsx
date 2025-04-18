@@ -20,6 +20,7 @@ const profile = () => {
   const [newPassword, setNewPassword] = useState<string>('')
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>('')
   const [phoneNumber, setPhoneNumber] = useState<string>('')
+  const [fileList, setFileList] = useState<any[]>([])
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
@@ -40,7 +41,7 @@ const profile = () => {
   const hasErrors = !!(errorEmail || errorPhoneNumber || errorCurrentPassword || errorNewPassword || errorConfirmNewPassword);
 
 
-  const {logout, user} = useAuth()
+  const {logout, user, updateUser} = useAuth()
 
   useEffect(() => {
     if(user) {
@@ -106,7 +107,15 @@ const profile = () => {
     })
 
     if(!result.canceled) {
-      setImage(result.assets[0].uri)
+      const selectedImage = result.assets[0];
+      setImage(selectedImage.uri);
+      const file = {
+        uri: selectedImage.uri,
+        name: selectedImage.uri.split('/').pop(),
+        type: selectedImage.type || 'image/jpeg',
+      };
+
+      setFileList((prevList) => [...prevList, file]);
     }
   }
 
@@ -192,9 +201,41 @@ const profile = () => {
       }
     };
 
-    const handleChangeImage = () => {
+    const handleUploadImage = async () => {
+      if (!fileList.length) {
+        Alert.alert('Error', 'Selecciona una imagen primero');
+        return;
+      }
 
-    }
+      try {
+        const data = new FormData();
+        fileList.forEach((file) => {
+          data.append("profileImage", file);
+        });
+
+        const res = await axios.post(
+          `${env.API_URL}/users/change-image/${user.email}`,
+          data,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${user?.token}`,
+              'Content-Type': 'multipart/form-data',
+            }
+          }
+        );
+
+        if (res.status === 200) {
+          updateUser({ profileImage: res.data.profileImage });
+          Alert.alert('Éxito', 'Imagen actualizada correctamente');
+        }
+      } catch(error: any) {
+        console.error('Error uploading image:', error);
+        Alert.alert('Error', error.response?.data?.error || 'Error al subir la imagen');
+      } finally {
+        setFileList([]);
+      }
+    };
 
     const resetData = () => {
       setFullName('')
@@ -209,17 +250,22 @@ const profile = () => {
     <View style={[generalStyles.container]}>
       <View style={styles.container}>
         <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
-          <Image
-            source={
-              image ? { uri: image } : require('@/assets/images/avatar.webp')
-            }
-            style={styles.image}
-          />
+        <Image
+          source={
+            image
+              ? { uri: image }
+              : user?.profileImage
+                ? { uri: `${env.ASSETS_URL}/uploads/${user.profileImage}` }
+                : require('@/assets/images/avatar.webp')
+          }
+          style={styles.image}
+        />
+
         </TouchableOpacity>
         <TouchableOpacity
           style={[generalStyles.pillButtonSm, {  backgroundColor: Colors.royalBlue, marginBottom: 10 }]}
           onPress={() => {
-            handleChangeImage()
+            handleUploadImage()
           }}>
           <Text style={generalStyles.textButton}>Cambiar imagen</Text>
         </TouchableOpacity>

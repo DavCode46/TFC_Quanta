@@ -10,6 +10,7 @@ interface AuthContextType {
   logout: () => void;
   reloadFlag: boolean;
   triggerReload: () => void;
+  updateUser: (updatedData: any) => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (userData: any) => {
     setUser(userData);
+    console.log('userData', userData);
     await AsyncStorage.setItem('user', JSON.stringify(userData));
     router.push('/(auth)/(tabs)/Home');
   };
@@ -45,6 +47,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const setAccountData = async (accountData: any) => {
     setAccountContext(accountData);
     await AsyncStorage.setItem('account', JSON.stringify(accountData));
+  };
+
+  const updateUser = async (updatedData: any) => {
+    const updatedUser = { ...user, ...updatedData };
+    setUser(updatedUser);
+    await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
   const logout = async () => {
@@ -73,6 +81,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         logout,
         reloadFlag,
         triggerReload,
+        updateUser,
       }}
     >
       {children}
