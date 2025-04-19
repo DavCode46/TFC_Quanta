@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setAccountContext(null);
     await AsyncStorage.removeItem('account');
     await AsyncStorage.removeItem('user');
-    router.push('/Login');
+    router.replace('/Login');
   };
 
   const triggerReload = () => {
@@ -92,7 +92,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === null) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error('not inside an AuthProvider');
   }
   return context;
 };

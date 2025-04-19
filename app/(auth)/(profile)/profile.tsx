@@ -263,7 +263,7 @@ const profile = () => {
 
         </TouchableOpacity>
         <TouchableOpacity
-          style={[generalStyles.pillButtonSm, {  backgroundColor: Colors.royalBlue, marginBottom: 10 }]}
+          style={[generalStyles.buttonSm, {  backgroundColor: Colors.royalBlue, marginBottom: 10 }]}
           onPress={() => {
             handleUploadImage()
           }}>
@@ -347,14 +347,14 @@ const profile = () => {
       </ScrollView>
       <TouchableOpacity
           disabled={hasErrors}
-          style={[generalStyles.pillButton, {  backgroundColor: hasErrors ? Colors.gray : Colors.royalBlue, marginBottom: 10 }]}
+          style={[generalStyles.button, {  backgroundColor: hasErrors ? Colors.gray : Colors.royalBlue, marginBottom: 10 }]}
           onPress={() => {
             handleUpdateData()
           }}>
           <Text style={generalStyles.textButton}>Actualizar Datos</Text>
         </TouchableOpacity>
       <TouchableOpacity
-          style={[generalStyles.pillButton, { backgroundColor: Colors.dark, marginBottom: 10 }]}
+          style={[generalStyles.button, { backgroundColor: Colors.dark, marginBottom: 10 }]}
           onPress={() => {
             logout();
           }}>

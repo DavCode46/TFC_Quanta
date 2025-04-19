@@ -14,7 +14,7 @@ import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View
 
 
 
-const home = () => {
+const Home = () => {
 
 
   const [balance, setBalance] = useState(1420)
@@ -91,7 +91,7 @@ const home = () => {
 
   return (
 
-    <View style={[generalStyles.container, { paddingTop: 60 }]}>
+    <View style={[generalStyles.container, { paddingTop: 120 }]}>
       <View style={styles.section}>
         <Text style={styles.sectionText}>{balance}</Text>
         <Text style={styles.sectionTextSmall}>€</Text>
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default home
+export default Home

@@ -14,7 +14,7 @@ const RoundCornerBtn = forwardRef<React.ElementRef<typeof TouchableOpacity>, Rou
   ({ text, icon, ...props }, ref) => {
     return (
       <TouchableOpacity ref={ref} style={styles.container} {...props}>
-        <View style={styles.btn}>
+        <View style={[styles.btn, styles.shadow]}>
           <MaterialIcons name={icon} size={25} color={Colors.dark} />
         </View>
         {/* <Text style={styles.label}>{text}</Text> */}
@@ -47,7 +47,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
-  }
+  },
+  shadow: {
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.9,
+    elevation: 5,
+  },
 })
 
 export default RoundCornerBtn

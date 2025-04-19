@@ -50,7 +50,6 @@ const login = () => {
       <View style={generalStyles.container}>
         <Text style={generalStyles.header}>Bienvenido de nuevo</Text>
         <Text style={generalStyles.descriptionText}>Inicia sesión para continuar</Text>
-
         <View style={generalStyles.inputContainer}>
           <TextInput
             style={generalStyles.input}
@@ -76,7 +75,7 @@ const login = () => {
           </View>
         </View>
 
-        <TouchableOpacity style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
+        <TouchableOpacity style={[generalStyles.button, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
           handleLogin()
         }} >
           <Text style={generalStyles.textButton}>Iniciar sesión</Text>

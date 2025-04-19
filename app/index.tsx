@@ -39,7 +39,7 @@ const videoSource = assets ? { uri: assets[0].uri }: null
 
       <View style={styles.buttonsWrapper}>
         <View style={styles.buttonContainer}>
-          <Link href={'/Login'} style={[generalStyles.pillButton, { backgroundColor: Colors.dark, flex: 1 }]} asChild>
+          <Link href={'/Login'} style={[generalStyles.button, { backgroundColor: Colors.dark, flex: 1 }]} asChild>
             <TouchableOpacity>
               <Text style={[styles.textButton, { color: Colors.white }]}>Iniciar sesión</Text>
             </TouchableOpacity>
@@ -47,7 +47,7 @@ const videoSource = assets ? { uri: assets[0].uri }: null
         </View>
 
         <View style={styles.buttonContainer}>
-          <Link href={'/SignUp'} style={[generalStyles.pillButton, { backgroundColor: Colors.white, flex: 1 }]} asChild>
+          <Link href={'/SignUp'} style={[generalStyles.button, { backgroundColor: Colors.white, flex: 1 }]} asChild>
             <TouchableOpacity>
               <Text style={styles.textButton}>Crear cuenta</Text>
             </TouchableOpacity>
