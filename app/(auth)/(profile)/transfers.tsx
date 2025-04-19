@@ -128,7 +128,7 @@ const Transfers = () => {
             {errorAccount ? <Text style={generalStyles.error}>{errorAccount}</Text> : null}
           </View>
 
-        <TouchableOpacity style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
+        <TouchableOpacity style={[generalStyles.button, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
           if (validateUserData()) {
             handleTransferMoney();
           }

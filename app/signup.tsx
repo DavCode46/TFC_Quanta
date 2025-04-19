@@ -202,7 +202,7 @@ const signup = () => {
 
         <View style={{ flex: 1 }} >
           <TouchableOpacity
-            style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 20 }]}
+            style={[generalStyles.button, { backgroundColor: Colors.royalBlue, marginBottom: 20 }]}
             onPress={() => {
               handleRegister()
             }}

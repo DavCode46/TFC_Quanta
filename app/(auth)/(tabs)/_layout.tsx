@@ -31,7 +31,8 @@ const TabsLayout = () => {
             bottom: 0,
             left: 0,
             right: 0,
-          }
+          },
+
         }
       }
 
@@ -43,6 +44,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ size, color }) => (
             <MaterialIcons name="account-balance" size={size} color={color} />
           ),
+
           headerTransparent: true,
           header: () => <CustomHeader />,
         }}

@@ -79,7 +79,7 @@ const Withdraw = () => {
         {errorAmount && amount <= 0 ? <Text style={generalStyles.error}>{errorAmount}</Text> : null}
       </View>
       <View style={{ marginTop: 20 }}>
-        <TouchableOpacity style={[generalStyles.pillButton, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
+        <TouchableOpacity style={[generalStyles.button, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
           if (validateUserData()) {
             handleWithdrawMoney()
           }

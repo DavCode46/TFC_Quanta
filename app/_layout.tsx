@@ -1,8 +1,11 @@
+import Colors from '@/constants/Colors';
+import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
 import 'react-native-reanimated';
 import { AuthProvider } from './context/AuthContext';
 
@@ -49,6 +52,34 @@ function RootLayoutNav() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="SignUp"
+        options={{
+          title: '',
+          headerBackTitle: '',
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: Colors.background },
+          headerLeft: () => (
+            <TouchableOpacity onPress={router.back}>
+              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+       <Stack.Screen
+        name="Login"
+        options={{
+          title: '',
+          headerBackTitle: '',
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: Colors.background },
+          headerLeft: () => (
+            <TouchableOpacity onPress={router.back}>
+              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Stack>
   );
 }
