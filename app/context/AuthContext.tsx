@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setAccountContext(null);
     await AsyncStorage.removeItem('account');
     await AsyncStorage.removeItem('user');
-    router.push('/Login');
+    router.replace('/Login');
   };
 
   const triggerReload = () => {
