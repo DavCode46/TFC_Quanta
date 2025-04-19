@@ -1,13 +1,14 @@
 import CustomHeader from '@/components/CustomHeader';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Colors from '@/constants/Colors';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { BlurView } from 'expo-blur';
-import { Tabs } from 'expo-router';
+import { Link, Tabs } from 'expo-router';
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 
 
 const TabsLayout = () => {
@@ -49,6 +50,13 @@ const TabsLayout = () => {
 
               headerTransparent: true,
               header: () => <CustomHeader />,
+              headerRight: () => (
+                <Link href={'/Help'} asChild>
+                  <TouchableOpacity>
+                    <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
+                  </TouchableOpacity>
+                </Link>
+              ),
             }}
           />
 
@@ -60,7 +68,14 @@ const TabsLayout = () => {
                 <FontAwesome6 name='money-bill-transfer' size={size} color={color} />
               ),
               headerTransparent: true,
-              header: () => <CustomHeader />
+              header: () => <CustomHeader />,
+              headerRight: () => (
+                <Link href={'/Help'} asChild>
+                  <TouchableOpacity>
+                    <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
+                  </TouchableOpacity>
+                </Link>
+              ),
             }}
           />
           <Tabs.Screen
@@ -71,7 +86,14 @@ const TabsLayout = () => {
                 <FontAwesome6 name="bitcoin" size={size} color={color} />
               ),
               headerTransparent: true,
-              header: () => <CustomHeader />
+              header: () => <CustomHeader />,
+              headerRight: () => (
+                <Link href={'/Help'} asChild>
+                  <TouchableOpacity>
+                    <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
+                  </TouchableOpacity>
+                </Link>
+              ),
             }}
           />
         </Tabs>
