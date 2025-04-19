@@ -93,7 +93,7 @@ function RootLayoutNav() {
       options={{
         title: 'Ayuda',
         presentation: 'modal',
-        animation: 'slide_from_left',
+        animation: 'fade_from_bottom',
         headerStyle: { backgroundColor: Colors.background },
         headerTintColor: Colors.dark,
         headerTitleStyle: {

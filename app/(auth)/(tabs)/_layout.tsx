@@ -51,17 +51,7 @@ const TabsLayout = () => {
               header: () => <CustomHeader />,
             }}
           />
-          <Tabs.Screen
-            name="Operations"
-            options={{
-              title: 'Saldo',
-              tabBarIcon: ({ size, color }) => (
-                <Fontisto name="money-symbol" size={size} color={color} />
-              ),
-              headerTransparent: true,
-              header: () => <CustomHeader />
-            }}
-          />
+
           <Tabs.Screen
             name="Transfers"
             options={{
@@ -74,7 +64,7 @@ const TabsLayout = () => {
             }}
           />
           <Tabs.Screen
-            name="crypto"
+            name="Crypto"
             options={{
               title: 'Crypto',
               tabBarIcon: ({ size, color }) => (

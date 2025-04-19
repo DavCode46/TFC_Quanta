@@ -1,12 +1,30 @@
 import ProtectedRoute from '@/components/ProtectedRoute';
-import { Stack } from 'expo-router';
+import Colors from '@/constants/Colors';
+import { Ionicons } from '@expo/vector-icons';
+import { Link, router, Stack } from 'expo-router';
+import { TouchableOpacity } from 'react-native';
 
 export default function ProfileLayout() {
   return (
     <ProtectedRoute>
       <Stack
         screenOptions={{
-          headerShown: false,
+          title: '',
+          headerBackTitle: '',
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: Colors.background },
+          headerLeft: () => (
+            <TouchableOpacity onPress={router.back}>
+              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <Link href={'/Help'} asChild>
+              <TouchableOpacity>
+                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
+              </TouchableOpacity>
+            </Link>
+          ),
         }}
       />
     </ProtectedRoute>

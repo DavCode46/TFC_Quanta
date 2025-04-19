@@ -14,16 +14,9 @@ const CustomHeader = () => {
   const insets = useSafeAreaInsets();
   const adjustedTop = Math.min(insets.top, 80);
   return (
-    <BlurView intensity={60} tint={'light'} style={{ paddingTop: adjustedTop }}>
+    <BlurView intensity={70} tint={'systemThickMaterialLight'} style={{ paddingTop: adjustedTop }}>
       <View style={[styles.container, styles.shadow]}>
-        <Link href='/(auth)/(profile)/Help' asChild>
-          <TouchableOpacity>
-            <Text style={[generalStyles.roundCornerBtn, styles.shadow, styles.roundBtnSize]}>
-              <Ionicons name="help" size={20} color={Colors.dark} />
-            </Text>
-          </TouchableOpacity>
-        </Link>
-        <Link href='/(auth)/(profile)/Profile' asChild>
+        <Link href='/(auth)/(profile)/Profile' style={{marginRight: 20}} asChild>
           <TouchableOpacity>
             <Text style={[generalStyles.roundCornerBtn, styles.shadow, styles.roundBtnSize]}>{initials}</Text>
           </TouchableOpacity>
@@ -36,7 +29,7 @@ const CustomHeader = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     padding: 10,
     borderBottomColor: Colors.lightGray,

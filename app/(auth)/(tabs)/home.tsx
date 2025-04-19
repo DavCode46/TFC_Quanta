@@ -14,7 +14,7 @@ import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View
 
 
 
-const home = () => {
+const Home = () => {
 
 
   const [balance, setBalance] = useState(1420)
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default home
+export default Home

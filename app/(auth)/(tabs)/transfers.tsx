@@ -100,7 +100,7 @@ const Transfers = () => {
           value={amount === 0 ? '' : amount.toString()}
           onChangeText={text => handleAmountChange(parseFloat(text) || 0)}
         />
-        {errorAmount && amount <= 0 ? <Text style={generalStyles.error}>{errorAmount}</Text> : null}
+        {errorAmount && amount <= 0 ? <Text style={[generalStyles.error, {marginBottom: 10}]}>{errorAmount}</Text> : null}
 
         <View style={generalStyles.inputContainer}>
         <Text>Ingresa el asunto:</Text>
@@ -111,20 +111,17 @@ const Transfers = () => {
               value={subject}
               onChangeText={handleSubjectChange}
             />
-            {errorSubject ? <Text style={generalStyles.error}>{errorSubject}</Text> : null}
+            {errorSubject ? <Text style={[generalStyles.error, {marginBottom: -20}]}>{errorSubject}</Text> : null}
         </View>
-
-
-
-          <View style={generalStyles.inputContainer}>
-            <Text>Ingresa el número de cuenta:</Text>
-            <TextInput
-              style={generalStyles.input}
-              placeholder="Cuenta destino"
-              keyboardType="default"
-              value={account}
-              onChangeText={handleAccountChange}
-            />
+        <View style={generalStyles.inputContainer}>
+          <Text>Ingresa el número de cuenta:</Text>
+           <TextInput
+             style={generalStyles.input}
+             placeholder="Cuenta destino"
+             keyboardType="default"
+             value={account}
+             onChangeText={handleAccountChange}
+          />
             {errorAccount ? <Text style={generalStyles.error}>{errorAccount}</Text> : null}
           </View>
 

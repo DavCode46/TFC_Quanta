@@ -50,7 +50,6 @@ const login = () => {
       <View style={generalStyles.container}>
         <Text style={generalStyles.header}>Bienvenido de nuevo</Text>
         <Text style={generalStyles.descriptionText}>Inicia sesión para continuar</Text>
-
         <View style={generalStyles.inputContainer}>
           <TextInput
             style={generalStyles.input}
