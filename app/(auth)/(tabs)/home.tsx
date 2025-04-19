@@ -91,7 +91,7 @@ const home = () => {
 
   return (
 
-    <View style={[generalStyles.container, { paddingTop: 60 }]}>
+    <View style={[generalStyles.container, { paddingTop: 120 }]}>
       <View style={styles.section}>
         <Text style={styles.sectionText}>{balance}</Text>
         <Text style={styles.sectionTextSmall}>€</Text>

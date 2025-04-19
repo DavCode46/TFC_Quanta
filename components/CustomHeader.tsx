@@ -1,3 +1,4 @@
+import { useAuth } from '@/app/context/AuthContext';
 import Colors from '@/constants/Colors';
 import { generalStyles } from '@/constants/Styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -8,8 +9,10 @@ import { StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-nativ
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CustomHeader = () => {
+  const { user } = useAuth();
+  const initials = user?.username.charAt(0).toUpperCase() + user?.username.charAt(1).toUpperCase();
   const insets = useSafeAreaInsets();
-  const adjustedTop = Math.min(insets.top, 20);
+  const adjustedTop = Math.min(insets.top, 80);
   return (
     <BlurView intensity={60} tint={'light'} style={{ paddingTop: adjustedTop }}>
       <View style={[styles.container, styles.shadow]}>
@@ -22,7 +25,7 @@ const CustomHeader = () => {
         </Link>
         <Link href='/(auth)/(profile)/Profile' asChild>
           <TouchableOpacity>
-            <Text style={[generalStyles.roundCornerBtn, styles.shadow, styles.roundBtnSize]}>DM</Text>
+            <Text style={[generalStyles.roundCornerBtn, styles.shadow, styles.roundBtnSize]}>{initials}</Text>
           </TouchableOpacity>
         </Link>
       </View>
