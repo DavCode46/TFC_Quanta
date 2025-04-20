@@ -112,6 +112,19 @@ function RootLayoutNav() {
         />
         <Stack.Screen name = "(auth)/(tabs)" options = {{ headerShown: false }} />
         <Stack.Screen name="(auth)/(profile)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/crypto" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/crypto/[id]"
+          options={{
+          title: '',
+          headerBackTitle: '',
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: Colors.background },
+          headerLeft: () => (
+            <TouchableOpacity onPress={router.back}>
+              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
+            </TouchableOpacity>
+          )
+        }} />
 
 
     </Stack>

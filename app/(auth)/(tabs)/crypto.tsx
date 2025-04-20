@@ -8,7 +8,7 @@ import { useHeaderHeight } from '@react-navigation/elements'
 import axios from 'axios'
 import { Link } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, Alert, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const Crypto = () => {
@@ -95,8 +95,18 @@ const Crypto = () => {
                   <Text style={styles.title}>{crypto.symbol}</Text>
                   <Text style={styles.dominance}>{crypto.quote.EUR.market_cap_dominance.toFixed(2)}B</Text>
                 </View>
-                <Link href={`/crypto/${crypto.id}`} asChild>
+                <Link  href={`/crypto/${crypto.id}`} asChild>
+                  <TouchableOpacity style={styles.detailButton}>
+                    <MaterialIcons
+                      name="remove-red-eye"
+                      size={20}
+                      color={Colors.royalBlue}
+                    />
+                    {/*
+                    <Text style={{color: Colors.royalBlue, fontSize: 12}}>Ver</Text>
+                   */}
 
+                  </TouchableOpacity>
                 </Link>
                 </View>
 
@@ -167,6 +177,17 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 13,
     fontWeight: '400'
+  },
+  detailButton: {
+    /*
+   borderColor: Colors.royalBlue,
+   borderWidth: 1,
+   borderRadius: 50,
+   width: 40,
+   height: 25,
+   justifyContent: 'center',
+   alignItems: 'center',
+   */
   }
 })
 
