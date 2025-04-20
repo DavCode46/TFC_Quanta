@@ -1,10 +1,12 @@
 import env from '@/app/config/envConfig'
 import { useAuth } from '@/app/context/AuthContext'
+import HeaderCrypto from '@/components/HeaderCrypto'
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import { MaterialIcons } from '@expo/vector-icons'
 import { useHeaderHeight } from '@react-navigation/elements'
 import axios from 'axios'
+import { Link } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, Alert, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -75,12 +77,14 @@ const Crypto = () => {
       {cryptoData ? (
         <View>
           <Text style={generalStyles.header}>Criptomonedas</Text>
-          {cryptoData.map((crypto: any) => {
-            const fullData = completeCryptoData?.[crypto.id]; // Busca por id
+          <HeaderCrypto />
+          {cryptoData.map((crypto: any, index: any) => {
+            const fullData = completeCryptoData?.[crypto.id];
             return (
               <View key={crypto.id} style={styles.cryptoContainer}>
 
-                <View style={styles.cryptoNameContainer}>
+                <View style={[styles.cryptoNameContainer, styles.shadow]}>
+                <Text style={{marginRight: 10, fontSize: 12, fontWeight: '200' }}>{index + 1}</Text>
                    {fullData && (
                   <Image
                     source={{ uri: fullData.logo }}
@@ -88,21 +92,24 @@ const Crypto = () => {
                   />
                 )}
                 <View style={{gap: 5}}>
-                  <Text style={styles.title}>{crypto.name}</Text>
-                  <Text style={styles.symbol}>{crypto.symbol}</Text>
+                  <Text style={styles.title}>{crypto.symbol}</Text>
+                  <Text style={styles.dominance}>{crypto.quote.EUR.market_cap_dominance.toFixed(2)}B</Text>
                 </View>
+                <Link href={`/crypto/${crypto.id}`} asChild>
+
+                </Link>
                 </View>
 
-                <View style={{alignItems: 'flex-end', gap: 5}}>
+                <View style={{alignItems: 'center',justifyContent: 'center', flexDirection: 'row', gap: 5}}>
                   <Text style={styles.price}>{crypto.quote.EUR.price.toFixed(2)} €</Text>
                   <View style={styles.quoteContainer}>
 
                   <MaterialIcons
-                      name={crypto.quote.EUR.percent_change_24h > 0 ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
+                      name={crypto.quote.EUR.percent_change_24h > 0 ? 'arrow-drop-up' : 'arrow-drop-down'}
                       size={30}
                       color={crypto.quote.EUR.percent_change_24h > 0 ? 'green' : 'red'}
                     />
-                  <Text>{crypto.quote.EUR.percent_change_24h}</Text>
+                  <Text style={styles.price}>{crypto.quote.EUR.percent_change_24h.toFixed(2)} %</Text>
                   </View>
                 </View>
               </View>
@@ -123,9 +130,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     gap: 10,
-    backgroundColor: Colors.white,
-    padding: 20,
-    borderRadius: 10
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    borderRadius: 10,
+    borderBottomColor: Colors.lightGray,
+    borderBottomWidth: 2,
+  },
+  shadow: {
+    shadowColor: Colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.0,
+    elevation: 1,
   },
   cryptoNameContainer: {
     flex: 1,
@@ -141,11 +160,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700'
   },
-  symbol: {
-    fontSize: 12
+  dominance: {
+    fontSize: 12,
+    color: Colors.gray
   },
   price: {
-
+    fontSize: 13,
+    fontWeight: '400'
   }
 })
 
