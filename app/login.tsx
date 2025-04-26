@@ -39,6 +39,7 @@ const login = () => {
 
   }
 
+
   const setData = () => {
     setEmail('');
     setPassword('');
@@ -87,6 +88,14 @@ const login = () => {
               ¿Aún no tienes una cuenta? Regístrate
             </Text>
           </TouchableOpacity>
+        </Link>
+
+        <Link href='/ForgotPassword' replace asChild>
+          <TouchableOpacity>
+              <Text style={[generalStyles.link, { color: Colors.dark, marginTop: 10 }]}>
+                ¿Has olvidado tu contraseña? Restablecer
+              </Text>
+            </TouchableOpacity>
         </Link>
       </View>
     </KeyboardAvoidingView>
