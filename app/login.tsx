@@ -4,7 +4,7 @@ import { generalStyles } from '@/constants/Styles'
 import env from '@/app/config/envConfig'
 import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
-import { Link, router } from 'expo-router'
+import { Link } from 'expo-router'
 import React, { useMemo, useState } from 'react'
 import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useAuth } from './context/AuthContext'
@@ -13,8 +13,7 @@ const login = () => {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [errorEmail, setErrorEmail] = useState('')
-  const [errorPassword, setErrorPassword] = useState('')
+
   const { login } = useAuth()
 
   const passwordSecureEntry = useMemo(() => !showPassword, [showPassword])

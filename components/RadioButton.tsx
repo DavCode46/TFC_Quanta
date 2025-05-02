@@ -1,5 +1,5 @@
 import Colors from '@/constants/Colors';
-import React, { FC } from 'react';
+import React from 'react';
 import { GestureResponderEvent, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface RadioButtonProps {

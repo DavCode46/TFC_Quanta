@@ -1,8 +1,7 @@
 import Colors from '@/constants/Colors';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { MaterialIcons } from '@expo/vector-icons';
 import React, { forwardRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 type RoundCornerBtnProps = {
   text: string;
@@ -17,7 +16,6 @@ const RoundCornerBtn = forwardRef<React.ElementRef<typeof TouchableOpacity>, Rou
         <View style={[styles.btn, styles.shadow]}>
           <MaterialIcons name={icon} size={25} color={Colors.dark} />
         </View>
-        {/* <Text style={styles.label}>{text}</Text> */}
       </TouchableOpacity>
     );
   }

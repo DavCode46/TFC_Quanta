@@ -1,11 +1,10 @@
 import { useAuth } from '@/app/context/AuthContext';
 import Colors from '@/constants/Colors';
 import { generalStyles } from '@/constants/Styles';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { BlurView } from 'expo-blur';
 import { Link } from 'expo-router';
 import React from 'react';
-import { StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CustomHeader = () => {

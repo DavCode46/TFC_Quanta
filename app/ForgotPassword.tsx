@@ -16,7 +16,7 @@ import env from './config/envConfig'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
 
@@ -26,7 +26,7 @@ const ForgotPassword = () => {
       return
     }
 
-    setLoading(true)
+    setIsLoading(true)
     setError('')
     setSuccess('')
 
@@ -51,7 +51,7 @@ const ForgotPassword = () => {
         setError('Ha ocurrido un error. Intenta más tarde.')
       }
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
@@ -74,9 +74,9 @@ const ForgotPassword = () => {
       <TouchableOpacity
         style={[generalStyles.button, {backgroundColor: Colors.royalBlue}]}
         onPress={handleResetPassword}
-        disabled={loading}
+        disabled={isLoading}
       >
-        {loading
+        {isLoading
           ? <ActivityIndicator />
           : <Text style={generalStyles.textButton}>Enviar código</Text>
         }

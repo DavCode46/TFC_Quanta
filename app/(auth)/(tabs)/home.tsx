@@ -1,15 +1,12 @@
 import env from '@/app/config/envConfig';
-import AuthContext, { useAuth } from '@/app/context/AuthContext';
-import transactions from '@/app/data/dummyData.js';
+import { useAuth } from '@/app/context/AuthContext';
 import { determineTransactionIcon, formatDate } from '@/app/utils/Utils';
 import RoundCornerBtn from '@/components/RoundCornerBtn';
 import Colors from '@/constants/Colors';
 import { generalStyles } from '@/constants/Styles';
-import { Ionicons } from '@expo/vector-icons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import axios from 'axios';
 import { Link } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 
@@ -23,7 +20,7 @@ const Home = () => {
   const [dbTransactions, setDbTransactions] = useState([]);
   const [noTransactions, setNoTransactions] = useState(false);
 
-  const { user,accountContext, setAccountData, reloadFlag } = useAuth()
+  const { user, setAccountData, reloadFlag } = useAuth()
 
   const formattedBalance = balance.toFixed(2).replace('.', ',');
 

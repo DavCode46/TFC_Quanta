@@ -1,15 +1,12 @@
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import { useAssets } from 'expo-asset'
-import { Link, Redirect } from 'expo-router'
+import { Link } from 'expo-router'
 import { useVideoPlayer, VideoView } from 'expo-video'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const index = () => {
-
-  // return <Redirect href={'/(auth)/(tabs)/home'} />
-
   const [assets] = useAssets([require('@/assets/videos/intro.mp4')])
 const videoSource = assets ? { uri: assets[0].uri }: null
 

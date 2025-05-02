@@ -1,7 +1,7 @@
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { Link, router, Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
 
 export default function ProfileLayout() {

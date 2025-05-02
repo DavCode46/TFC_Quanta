@@ -1,15 +1,14 @@
 import env from '@/app/config/envConfig';
 import { useAuth } from '@/app/context/AuthContext';
-import HeaderCrypto from '@/components/HeaderCrypto';
 import HeaderCryptoDetails from '@/components/HeaderCryptoDetails';
 import PercentageChange from '@/components/PercentChange';
 import Colors from '@/constants/Colors';
 import { generalStyles } from '@/constants/Styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import axios from 'axios';
-import { Link, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, Image, StyleSheet, Text, View } from 'react-native';
 
 const CryptoDetail = () => {
   const { user } = useAuth();

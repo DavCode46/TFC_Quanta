@@ -11,13 +11,12 @@ const ResetPassword = () =>  {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [pass, setPass] = useState('');
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
 
   const submit = async () => {
     try {
+      setIsLoading(true);
       const { data } = await axios.post(
         `${env.API_URL}/password/reset`,
         { email, code, newPassword: pass }
@@ -26,6 +25,8 @@ const ResetPassword = () =>  {
     } catch (err: any) {
       const msg = err.response?.data?.message || 'Error, inténtalo luego.';
       Alert.alert('Error', msg);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,10 +39,10 @@ const ResetPassword = () =>  {
       <TouchableOpacity
         style={[generalStyles.button, {backgroundColor: Colors.royalBlue, marginTop: 20}]}
         onPress={submit}
-        disabled={loading}
+        disabled={isLoading}
       >
-        {loading
-          ? <ActivityIndicator />
+        {isLoading
+          ? <ActivityIndicator size={'small'} color={Colors.white}/>
           : <Text style={generalStyles.textButton}>Restablecer contraseña</Text>
         }
       </TouchableOpacity>

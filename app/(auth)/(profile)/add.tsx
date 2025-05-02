@@ -5,7 +5,7 @@ import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import axios from 'axios'
 import { router } from 'expo-router'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 const Add = () => {

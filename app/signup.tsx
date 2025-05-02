@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import { Link, router } from 'expo-router'
 import React, { useMemo, useState } from 'react'
-import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
 
 const signup = () => {
 

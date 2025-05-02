@@ -1,9 +1,7 @@
 import env from '@/app/config/envConfig'
 import { useAuth } from '@/app/context/AuthContext'
-import transactions from '@/app/data/dummyData'
 import { determineTransactionIcon, formatDate } from '@/app/utils/Utils'
 import Colors from '@/constants/Colors'
-import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, ScrollView, Text, View } from 'react-native'
@@ -13,7 +11,7 @@ const Transactions = () => {
   const [loading, setLoading] = useState(true);
   const [dbTransactions, setDbTransactions] = useState([]);
   const [noTransactions, setNoTransactions] = useState(false);
-  const { user,accountContext, setAccountData, reloadFlag } = useAuth()
+  const { user, reloadFlag } = useAuth()
 
   useEffect(() => {
     const fetchData = async () => {
