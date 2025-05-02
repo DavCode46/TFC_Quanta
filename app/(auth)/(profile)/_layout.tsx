@@ -19,11 +19,9 @@ export default function ProfileLayout() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+              <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
           ),
         }}
       >
@@ -40,11 +38,9 @@ export default function ProfileLayout() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+              <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -61,11 +57,9 @@ export default function ProfileLayout() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+              <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -83,11 +77,9 @@ export default function ProfileLayout() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+              <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -104,11 +96,9 @@ export default function ProfileLayout() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+              <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -126,13 +116,11 @@ export default function ProfileLayout() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+              <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
           ),
-        }}
+      }}
       />
       </Stack>
     </ProtectedRoute>

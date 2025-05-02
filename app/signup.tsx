@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import { Link, router } from 'expo-router'
 import React, { useMemo, useState } from 'react'
-import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
 
 const signup = () => {
 
@@ -17,6 +17,7 @@ const signup = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const passwordSecureTextEntry = useMemo(() => !showPassword, [showPassword])
   const confirmPasswordSecureTextEntry = useMemo(() => !showConfirmPassword, [showConfirmPassword])
@@ -105,6 +106,7 @@ const signup = () => {
   const handleRegister = async () => {
     if(validateUserData()) {
       try{
+        setIsLoading(true)
         const res = await axios.post(`${env.API_URL}/users/register`, {
           username: fullName,
           email,
@@ -124,6 +126,8 @@ const signup = () => {
         console.log('-'.repeat(100))
        console.log(error.response.data.error)
         Alert.alert('Error', error.response.data.error)
+      } finally{
+        setIsLoading(false)
       }
     }
   }
@@ -207,7 +211,11 @@ const signup = () => {
               handleRegister()
             }}
           >
-            <Text style={generalStyles.textButton}>Crear cuenta</Text>
+            {isLoading ? (
+              <ActivityIndicator size='small' color={Colors.white} />
+            ): (
+              <Text style={generalStyles.textButton}>Crear cuenta</Text>
+            )}
           </TouchableOpacity>
           <Link href={'/Login'} replace asChild>
             <TouchableOpacity>
