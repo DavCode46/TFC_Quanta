@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
-  const logout = async (confirm: Boolean = false) => {
+  const logout = async (confirm: Boolean) => {
     if(confirm){
       setUser(null);
       setAccountContext(null);
@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setAccountContext(null);
           await AsyncStorage.removeItem('account');
           await AsyncStorage.removeItem('user');
+          Alert.alert('Sesión cerrada', 'Has cerrado sesión correctamente');
           router.replace('/');
         },
       },

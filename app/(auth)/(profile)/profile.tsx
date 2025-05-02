@@ -235,7 +235,7 @@ const profile = () => {
           'Datos actualizados correctamente'
         )
         resetData()
-        logout()
+        logout(false)
       }
     } catch (err: any) {
       Alert.alert('Ha ocurrido un error', err.response?.data?.error)
@@ -330,11 +330,13 @@ const profile = () => {
               />
             </TouchableOpacity>
           }
+          onRequestClose={hideMenu}
+          animationDuration={200}
         >
           <MenuItem
             onPress={() => {
               hideMenu()
-              logout()
+              logout(false)
             }}
           >
             Cerrar sesión
@@ -356,7 +358,7 @@ const profile = () => {
       <TouchableOpacity
         style={[
           generalStyles.buttonSm,
-          { backgroundColor: Colors.royalBlue, marginBottom: 10 },
+          { backgroundColor: Colors.royalBlue, marginBottom: 10, alignSelf: 'center' },
         ]}
         onPress={handleUploadImage}
       >
@@ -554,7 +556,17 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   menuButton: {
-    padding: 8,
+    position: 'absolute',
+    bottom: 0,
+    right: -10,
+    backgroundColor: Colors.background,
+    borderRadius: 12,
+    padding: 4,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
 })
 
