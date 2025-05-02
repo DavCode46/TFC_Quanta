@@ -266,11 +266,11 @@ const profile = () => {
                 }
               )
               if (res.status === 200) {
-                Alert.alert('Éxito', 'Cuenta eliminada correctamente')
-                logout()
+                Alert.alert('Éxito', res.data.message)
+                logout(true)
               }
-            } catch {
-              Alert.alert('Error', 'No se pudo eliminar la cuenta')
+            } catch(error: any) {
+              Alert.alert('Error', error.response.data.error)
             }
           },
         },

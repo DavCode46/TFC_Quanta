@@ -8,7 +8,7 @@ interface AuthContextType {
   accountContext: any;
   login: (userData: any) => void;
   setAccountData: (accountData: any) => void;
-  logout: () => void;
+  logout: (confirm: Boolean) => void;
   reloadFlag: boolean;
   triggerReload: () => void;
   updateUser: (updatedData: any) => void;
@@ -56,7 +56,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
-  const logout = async () => {
+  const logout = async (confirm: Boolean = false) => {
+    if(confirm){
+      setUser(null);
+      setAccountContext(null);
+      await AsyncStorage.removeItem('account');
+      await AsyncStorage.removeItem('user');
+      router.replace('/');
+    } else {
     Alert.alert('Salir', '¿Estás seguro que deseas cerrar sesión?', [
       {
         text: 'Cancelar',
@@ -73,6 +80,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         },
       },
     ]);
+  }
   };
 
   const triggerReload = () => {
