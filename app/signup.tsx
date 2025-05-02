@@ -22,6 +22,16 @@ const signup = () => {
   const passwordSecureTextEntry = useMemo(() => !showPassword, [showPassword])
   const confirmPasswordSecureTextEntry = useMemo(() => !showConfirmPassword, [showConfirmPassword])
 
+  const [errorEmail, setErrorEmail] = useState('');
+  const [errorPassword, setErrorPassword] = useState('');
+  const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
+  const [errorFullName, setErrorFullName] = useState('');
+  const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
+
+  const hasErrors = !!(errorEmail || errorPassword || errorConfirmPassword || errorFullName || errorPhoneNumber)
+
+
+
 
   const validateUserData = () => {
     let isValid = true;
@@ -66,11 +76,7 @@ const signup = () => {
 
 
 
-  const [errorEmail, setErrorEmail] = useState('');
-  const [errorPassword, setErrorPassword] = useState('');
-  const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
-  const [errorFullName, setErrorFullName] = useState('');
-  const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
+
 
 
 
@@ -206,7 +212,8 @@ const signup = () => {
 
         <View style={{ flex: 1 }} >
           <TouchableOpacity
-            style={[generalStyles.button, { backgroundColor: Colors.royalBlue, marginBottom: 20 }]}
+            style={[generalStyles.button, { backgroundColor: hasErrors ? Colors.gray : Colors.royalBlue, marginBottom: 20 }]}
+            disabled={hasErrors || isLoading}
             onPress={() => {
               handleRegister()
             }}
