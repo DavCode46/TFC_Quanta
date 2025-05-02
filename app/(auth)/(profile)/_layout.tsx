@@ -1,3 +1,4 @@
+import ProfileActionsMenu from '@/components/ProfileActionsMenu';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
@@ -32,16 +33,6 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => router.push('/Help')}>
-              <Ionicons name="help-circle" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
         }}
       />
        <Stack.Screen
@@ -51,16 +42,6 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => router.push('/Help')}>
-              <Ionicons name="help-circle" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
         }}
       />
 
@@ -71,16 +52,6 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => router.push('/Help')}>
-              <Ionicons name="help-circle" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
         }}
       />
         <Stack.Screen
@@ -90,16 +61,6 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => router.push('/Help')}>
-              <Ionicons name="help-circle" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
         }}
       />
 
@@ -110,16 +71,6 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => router.push('/Help')}>
-              <Ionicons name="help-circle" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
       }}
       />
       </Stack>

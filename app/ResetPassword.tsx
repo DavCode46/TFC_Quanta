@@ -2,6 +2,7 @@
 import Colors from '@/constants/Colors';
 import { generalStyles } from '@/constants/Styles';
 import axios from 'axios';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { ActivityIndicator, Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import env from './config/envConfig';
@@ -22,8 +23,9 @@ const ResetPassword = () =>  {
         { email, code, newPassword: pass }
       );
       Alert.alert('Éxito', data.message);
+      router.replace('/Login');
     } catch (err: any) {
-      const msg = err.response?.data?.message || 'Error, inténtalo luego.';
+      const msg = err.response?.data?.error || 'Error, inténtalo luego.';
       Alert.alert('Error', msg);
     } finally {
       setIsLoading(false);

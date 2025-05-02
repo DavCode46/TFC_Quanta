@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 
 interface AuthContextType {
   user: any;
@@ -56,11 +57,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = async () => {
-    setUser(null);
-    setAccountContext(null);
-    await AsyncStorage.removeItem('account');
-    await AsyncStorage.removeItem('user');
-    router.replace('/');
+    Alert.alert('Salir', '¿Estás seguro que deseas cerrar sesión?', [
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+      {
+        text: 'Salir',
+        onPress: async () => {
+          setUser(null);
+          setAccountContext(null);
+          await AsyncStorage.removeItem('account');
+          await AsyncStorage.removeItem('user');
+          router.replace('/');
+        },
+      },
+    ]);
   };
 
   const triggerReload = () => {

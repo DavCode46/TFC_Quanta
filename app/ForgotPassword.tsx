@@ -39,16 +39,13 @@ const ForgotPassword = () => {
           headers: { 'Content-Type': 'application/json' },
         }
       )
-      setSuccess(data.message || 'Revisa tu correo para el enlace de reinicio.')
+      Alert.alert('Éxito', data.message)
 
-      router.push('/ResetPassword')
+      router.replace('/ResetPassword')
 
     } catch (err) {
-      console.log(err)
       if (axios.isAxiosError(err) && err.response) {
-        setError(err.response.data.message || 'Error al solicitar el reinicio.')
-      } else {
-        setError('Ha ocurrido un error. Intenta más tarde.')
+       Alert.alert('Error', err.response.data.error)
       }
     } finally {
       setIsLoading(false)
@@ -72,7 +69,7 @@ const ForgotPassword = () => {
       {success ? <Text style={styles.success}>{success}</Text> : null}
 
       <TouchableOpacity
-        style={[generalStyles.button, {backgroundColor: Colors.royalBlue}]}
+        style={[generalStyles.button, {backgroundColor: Colors.royalBlue, marginTop: 10}]}
         onPress={handleResetPassword}
         disabled={isLoading}
       >

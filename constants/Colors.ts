@@ -7,4 +7,5 @@ export default {
   black: "#000",
   royalBlue: "#6431ee",
   cornflowerBlue: "#617dfc",
+  red: "#FF3B30",
 };
