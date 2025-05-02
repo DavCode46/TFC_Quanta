@@ -1,17 +1,17 @@
 import CustomHeader from '@/components/CustomHeader';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Colors from '@/constants/Colors';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-import Fontisto from '@expo/vector-icons/Fontisto';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { BlurView } from 'expo-blur';
-import { Link, Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
 
 const TabsLayout = () => {
+  const router = useRouter()
   return (
     <ProtectedRoute>
         <Tabs
@@ -51,11 +51,9 @@ const TabsLayout = () => {
               headerTransparent: true,
               header: () => <CustomHeader />,
               headerRight: () => (
-                <Link href={'/Help'} asChild>
-                  <TouchableOpacity>
-                    <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-                  </TouchableOpacity>
-                </Link>
+                <TouchableOpacity onPress={() => router.push('/Help')}>
+                  <Ionicons name="help-circle" size={30} color={Colors.dark} />
+                </TouchableOpacity>
               ),
             }}
           />
@@ -70,11 +68,9 @@ const TabsLayout = () => {
               headerTransparent: true,
               header: () => <CustomHeader />,
               headerRight: () => (
-                <Link href={'/Help'} asChild>
-                  <TouchableOpacity>
-                    <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-                  </TouchableOpacity>
-                </Link>
+                <TouchableOpacity onPress={() => router.push('/Help')}>
+                  <Ionicons name="help-circle" size={30} color={Colors.dark} />
+                </TouchableOpacity>
               ),
             }}
           />
@@ -88,11 +84,9 @@ const TabsLayout = () => {
               headerTransparent: true,
               header: () => <CustomHeader />,
               headerRight: () => (
-                <Link href={'/Help'} asChild>
-                  <TouchableOpacity>
-                    <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-                  </TouchableOpacity>
-                </Link>
+                <TouchableOpacity onPress={() => router.push('/Help')}>
+                  <Ionicons name="help-circle" size={30} color={Colors.dark} />
+                </TouchableOpacity>
               ),
             }}
           />

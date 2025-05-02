@@ -1,7 +1,8 @@
+import ProfileActionsMenu from '@/components/ProfileActionsMenu';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { Link, router, Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { TouchableOpacity } from 'react-native';
 
 export default function ProfileLayout() {
@@ -19,11 +20,9 @@ export default function ProfileLayout() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+              <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
           ),
         }}
       >
@@ -34,18 +33,6 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
-          ),
         }}
       />
        <Stack.Screen
@@ -55,18 +42,6 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
-          ),
         }}
       />
 
@@ -77,18 +52,6 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
-          ),
         }}
       />
         <Stack.Screen
@@ -98,18 +61,6 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
-          ),
         }}
       />
 
@@ -120,19 +71,7 @@ export default function ProfileLayout() {
           headerBackTitle: '',
           headerShadowVisible: false,
           headerStyle: { backgroundColor: Colors.background },
-          headerLeft: () => (
-            <TouchableOpacity onPress={router.back}>
-              <Ionicons name="arrow-back" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
-          ),
-        }}
+      }}
       />
       </Stack>
     </ProtectedRoute>

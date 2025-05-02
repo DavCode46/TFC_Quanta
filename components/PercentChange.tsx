@@ -1,4 +1,3 @@
-// components/PercentageChange.js
 import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';

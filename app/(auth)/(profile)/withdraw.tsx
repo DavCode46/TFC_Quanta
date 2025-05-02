@@ -1,6 +1,5 @@
 import env from '@/app/config/envConfig'
 import { useAuth } from '@/app/context/AuthContext'
-import RadioButton from '@/components/RadioButton'
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import axios from 'axios'

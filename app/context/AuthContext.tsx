@@ -1,13 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 
 interface AuthContextType {
   user: any;
   accountContext: any;
   login: (userData: any) => void;
   setAccountData: (accountData: any) => void;
-  logout: () => void;
+  logout: (confirm: Boolean) => void;
   reloadFlag: boolean;
   triggerReload: () => void;
   updateUser: (updatedData: any) => void;
@@ -55,12 +56,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await AsyncStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
-  const logout = async () => {
-    setUser(null);
-    setAccountContext(null);
-    await AsyncStorage.removeItem('account');
-    await AsyncStorage.removeItem('user');
-    router.replace('/Login');
+  const logout = async (confirm: Boolean) => {
+    if(confirm){
+      setUser(null);
+      setAccountContext(null);
+      await AsyncStorage.removeItem('account');
+      await AsyncStorage.removeItem('user');
+      router.replace('/');
+    } else {
+    Alert.alert('Salir', '¿Estás seguro que deseas cerrar sesión?', [
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+      {
+        text: 'Salir',
+        onPress: async () => {
+          setUser(null);
+          setAccountContext(null);
+          await AsyncStorage.removeItem('account');
+          await AsyncStorage.removeItem('user');
+          Alert.alert('Sesión cerrada', 'Has cerrado sesión correctamente');
+          router.replace('/');
+        },
+      },
+    ]);
+  }
   };
 
   const triggerReload = () => {

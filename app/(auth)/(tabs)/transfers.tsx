@@ -1,19 +1,16 @@
 import env from '@/app/config/envConfig'
 import { useAuth } from '@/app/context/AuthContext'
-import RadioButton from '@/components/RadioButton'
 import Colors from '@/constants/Colors'
 import { generalStyles } from '@/constants/Styles'
 import axios from 'axios'
 import { router } from 'expo-router'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 const Transfers = () => {
   const [amount, setAmount] = useState(0.0)
   const [account, setAccount] = useState('')
   const [subject, setSubject] = useState('')
-  const [accountType, setAccountType] = useState('myAccount')
-
 
   const [errorAmount, setErrorAmount] = useState('')
   const [errorAccount, setErrorAccount] = useState('')
@@ -31,11 +28,6 @@ const Transfers = () => {
 
     if (amount <= 0) {
       setErrorAmount('La cantidad debe ser mayor a 0')
-      isValid = false
-    }
-
-    if (accountType === 'otherAccount' && !validateAccount(account)) {
-      setErrorAccount('Número de cuenta no válido')
       isValid = false
     }
 

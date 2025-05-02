@@ -2,7 +2,7 @@ import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
-import { Link, router, Stack } from 'expo-router';
+import { router, Stack, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
@@ -49,6 +49,16 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
 
+  const HelpHeaderRight = () => {
+    const router = useRouter()
+
+    return (
+      <TouchableOpacity onPress={() => router.dismiss()}>
+        <Ionicons name="close" size={30} color={Colors.dark} />
+      </TouchableOpacity>
+    )
+  }
+
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -64,6 +74,11 @@ function RootLayoutNav() {
               <Ionicons name="arrow-back" size={30} color={Colors.dark} />
             </TouchableOpacity>
           ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+               <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
+           ),
         }}
       />
        <Stack.Screen
@@ -79,11 +94,9 @@ function RootLayoutNav() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <Link href={'/Help'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="help-circle-outline" size={30} color={Colors.dark} />
-              </TouchableOpacity>
-            </Link>
+           <TouchableOpacity onPress={() => router.push('/Help')}>
+              <Ionicons name="help-circle" size={30} color={Colors.dark} />
+           </TouchableOpacity>
           ),
         }}
       />
@@ -100,6 +113,11 @@ function RootLayoutNav() {
               <Ionicons name="arrow-back" size={30} color={Colors.dark} />
             </TouchableOpacity>
           ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+               <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
+           ),
         }}
       />
 
@@ -115,6 +133,11 @@ function RootLayoutNav() {
               <Ionicons name="arrow-back" size={30} color={Colors.dark} />
             </TouchableOpacity>
           ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => router.push('/Help')}>
+               <Ionicons name="help-circle" size={30} color={Colors.dark} />
+            </TouchableOpacity>
+           ),
         }}
       />
 
@@ -131,13 +154,7 @@ function RootLayoutNav() {
           fontSize: 20,
         },
         headerTitleAlign: 'center',
-        headerRight: () => (
-          <Link href={'/Login'} replace asChild>
-            <TouchableOpacity>
-              <Ionicons name="close" size={30} color={Colors.dark} />
-            </TouchableOpacity>
-          </Link>
-            ),
+        headerRight: () => <HelpHeaderRight />,
           }}
         />
         <Stack.Screen name = "(auth)/(tabs)" options = {{ headerShown: false }} />
@@ -155,8 +172,6 @@ function RootLayoutNav() {
             </TouchableOpacity>
           )
         }} />
-
-
     </Stack>
   );
 }

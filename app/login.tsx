@@ -4,16 +4,16 @@ import { generalStyles } from '@/constants/Styles'
 import env from '@/app/config/envConfig'
 import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
-import { Link, router } from 'expo-router'
+import { Link } from 'expo-router'
 import React, { useMemo, useState } from 'react'
-import { Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useAuth } from './context/AuthContext'
 const login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [errorEmail, setErrorEmail] = useState('')
-  const [errorPassword, setErrorPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
   const { login } = useAuth()
 
   const passwordSecureEntry = useMemo(() => !showPassword, [showPassword])
@@ -21,6 +21,7 @@ const login = () => {
   const handleLogin = async () => {
 
       try{
+        setIsLoading(true)
         const res = await axios.post(`${env.API_URL}/users/login`, {
           email,
           password,
@@ -35,6 +36,8 @@ const login = () => {
         console.log('-'.repeat(100))
        console.log(error.response.data.error)
         Alert.alert('Error', error.response.data.error)
+      } finally {
+        setIsLoading(false)
       }
 
   }
@@ -79,7 +82,11 @@ const login = () => {
         <TouchableOpacity style={[generalStyles.button, { backgroundColor: Colors.royalBlue, marginBottom: 10 }]} onPress={() => {
           handleLogin()
         }} >
-          <Text style={generalStyles.textButton}>Iniciar sesión</Text>
+          {isLoading ? (
+            <ActivityIndicator size='small' color={Colors.white} />
+          ): (
+            <Text style={generalStyles.textButton}>Iniciar sesión</Text>
+          )}
         </TouchableOpacity>
 
         <Link href={'/SignUp'} replace asChild>

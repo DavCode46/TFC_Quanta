@@ -36,7 +36,8 @@ export const generalStyles = StyleSheet.create({
   },
   buttonSm: {
     paddingHorizontal: 20,
-    height: 50,
+    width: "50%",
+    height: 40,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
