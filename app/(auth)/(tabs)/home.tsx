@@ -25,6 +25,8 @@ const Home = () => {
 
   const { user,accountContext, setAccountData, reloadFlag } = useAuth()
 
+  const formattedBalance = balance.toFixed(2).replace('.', ',');
+
   useEffect(() => {
     const fetchData = async () => {
       if (!user || !user.id) {
@@ -92,10 +94,18 @@ const Home = () => {
   return (
 
     <View style={[generalStyles.container, { paddingTop: 120 }]}>
-      <View style={styles.section}>
-        <Text style={styles.sectionText}>{balance}</Text>
-        <Text style={styles.sectionTextSmall}>€</Text>
-      </View>
+      <View style={styles.headerContainer}>
+
+    <View style={styles.headerColumn}>
+      <Text style={styles.label}>Cuenta *{account.substring(account.length - 4)}</Text>
+      <Text style={styles.valueSm}>{account.substring(account.length - 4)}</Text>
+    </View>
+
+    <View style={[styles.headerColumn, { alignItems: 'flex-end' }]}>
+      <Text style={styles.value}>{formattedBalance} €</Text>
+      <Text style={styles.labelSm}>Disponible</Text>
+    </View>
+  </View>
       <View style={styles.actionsContainer}>
         <Link href='/(auth)/(profile)/Add' asChild>
           <RoundCornerBtn text='Ingresar' icon='add' onPress={() => { }} />
@@ -149,20 +159,36 @@ const Home = () => {
 }
 
 const styles = StyleSheet.create({
-  section: {
-    marginVertical: 70,
+  headerContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    gap: 5
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginTop: 70,
+    marginBottom: 20,
   },
-  sectionText: {
-    fontSize: 50,
-    fontWeight: '700',
+  headerColumn: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
-  sectionTextSmall: {
+  label: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: Colors.royalBlue,
+  },
+  value: {
     fontSize: 20,
     fontWeight: '500',
+    color: Colors.dark,
+  },
+  valueSm: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: Colors.gray,
+  },
+  labelSm: {
+    fontSize: 15,
+    fontWeight: '400',
+    color: Colors.gray,
   },
   actionsContainer: {
     flexDirection: 'row',
@@ -173,10 +199,6 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
   },
-  roundBtnSize: {
-    width: 50,
-    height: 50,
-  }
 })
 
 export default Home
