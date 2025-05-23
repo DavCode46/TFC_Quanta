@@ -76,7 +76,7 @@ const Crypto = () => {
     <ScrollView style={generalStyles.container} contentContainerStyle={{ paddingTop: headerHeight, paddingBottom: insets.bottom + 50 }}>
       {cryptoData ? (
         <View>
-          <Text style={generalStyles.header}>Criptomonedas</Text>
+
           <HeaderCrypto />
           {cryptoData.map((crypto: any, index: any) => {
             const fullData = completeCryptoData?.[crypto.id];

@@ -50,7 +50,7 @@ const Transactions = () => {
 
   return (
      <ScrollView style={{ backgroundColor: Colors.white, padding: 20, borderRadius: 10, marginBottom: 50 }}>
-           <Text style={{ fontSize: 18, fontWeight: '500', marginBottom: 20 }}>Últimos movimientos</Text>
+           <Text style={{ fontSize: 18, fontWeight: '500', marginBottom: 20 }}>Mis movimientos</Text>
            {loading ? (
            <ActivityIndicator size="large" color={Colors.royalBlue} />
          ) : noTransactions ? (

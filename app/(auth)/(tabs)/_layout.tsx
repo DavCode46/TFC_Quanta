@@ -58,12 +58,13 @@ const TabsLayout = () => {
             }}
           />
 
+
           <Tabs.Screen
-            name="Transfers"
+            name="Crypto"
             options={{
-              title: 'Transferencias',
+              title: 'Crypto',
               tabBarIcon: ({ size, color }) => (
-                <FontAwesome6 name='money-bill-transfer' size={size} color={color} />
+                <FontAwesome6 name="bitcoin" size={size} color={color} />
               ),
               headerTransparent: true,
               header: () => <CustomHeader />,
@@ -74,12 +75,13 @@ const TabsLayout = () => {
               ),
             }}
           />
-          <Tabs.Screen
-            name="Crypto"
+
+<Tabs.Screen
+            name="Account"
             options={{
-              title: 'Crypto',
+              title: 'Cuenta',
               tabBarIcon: ({ size, color }) => (
-                <FontAwesome6 name="bitcoin" size={size} color={color} />
+                <FontAwesome6 name='user-tie' size={size} color={color} />
               ),
               headerTransparent: true,
               header: () => <CustomHeader />,

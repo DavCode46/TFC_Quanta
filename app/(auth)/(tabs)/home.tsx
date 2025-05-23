@@ -14,7 +14,7 @@ import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View
 const Home = () => {
 
 
-  const [balance, setBalance] = useState(1420)
+  const [balance, setBalance] = useState(0)
   const  [account, setAccount] = useState('')
   const [loading, setLoading] = useState(true);
   const [dbTransactions, setDbTransactions] = useState([]);
