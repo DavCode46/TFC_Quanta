@@ -81,15 +81,7 @@ const Account = () => {
         <Text style={styles.infoValue}>{formattedBalance} €</Text>
       </View>
 
-       <TouchableOpacity
-              style={[
-                generalStyles.button,
-                { backgroundColor: Colors.royalBlue, marginTop: 20, width: '90%' },
-              ]}
-              onPress={() => logout(false)}
-            >
-               <Text style={generalStyles.textButton}>Cerrar sesión</Text>
-            </TouchableOpacity>
+
     </ScrollView>
   )
 }

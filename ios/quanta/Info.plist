@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>myapp</string>
+          <string>quanta</string>
           <string>com.davidmb.quanta</string>
         </array>
       </dict>

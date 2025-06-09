@@ -77,6 +77,23 @@ const TabsLayout = () => {
           />
 
 <Tabs.Screen
+            name="AssistantScreen"
+            options={{
+              title: 'Asistente',
+              tabBarIcon: ({ size, color }) => (
+                <FontAwesome6 name="robot" size={size} color={color} />
+              ),
+              headerTransparent: true,
+              header: () => <CustomHeader />,
+              headerRight: () => (
+                <TouchableOpacity onPress={() => router.push('/Help')}>
+                  <Ionicons name="help-circle" size={30} color={Colors.dark} />
+                </TouchableOpacity>
+              ),
+            }}
+          />
+
+<Tabs.Screen
             name="Account"
             options={{
               title: 'Cuenta',

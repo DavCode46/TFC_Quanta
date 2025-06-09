@@ -179,15 +179,6 @@ const styles = StyleSheet.create({
     fontWeight: '400'
   },
   detailButton: {
-    /*
-   borderColor: Colors.royalBlue,
-   borderWidth: 1,
-   borderRadius: 50,
-   width: 40,
-   height: 25,
-   justifyContent: 'center',
-   alignItems: 'center',
-   */
   }
 })
 
